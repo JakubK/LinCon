@@ -7,10 +7,12 @@ namespace LinCon.Core.Services
   public class CaseRepository : ICaseRepository
   {
     LiteRepository _liteRepository;
+    IPathProvider _pathProvider;
 
-    public CaseRepository()
+    public CaseRepository(IPathProvider pathProvider)
     {
-      _liteRepository = new LiteRepository("connectionString");
+      _pathProvider = pathProvider;
+      _liteRepository = new LiteRepository($"Filename={_pathProvider.DbFileName};Mode=Exclusive");
     }
     public IEnumerable<Case> GetAll()
     {
