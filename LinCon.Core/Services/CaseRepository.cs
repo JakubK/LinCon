@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LinCon.Core.Models;
+using LinCon.Core.Services.Abstract;
 using LiteDB;
 
 namespace LinCon.Core.Services

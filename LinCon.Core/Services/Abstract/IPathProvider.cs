@@ -1,4 +1,4 @@
-namespace LinCon.Core.Services
+namespace LinCon.Core.Services.Abstract
 {
   public interface IPathProvider
   {

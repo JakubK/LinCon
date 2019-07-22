@@ -1,3 +1,5 @@
+using LinCon.Core.Services.Abstract;
+
 namespace LinCon.Core.Services
 {
   public class PathProvider : IPathProvider
