@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using LinCon.Core.Models;
+using LinCon.Core.Services.Abstract;
 
 namespace LinCon.Core.Services
 {
