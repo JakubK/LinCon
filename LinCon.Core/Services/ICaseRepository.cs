@@ -5,7 +5,9 @@ namespace LinCon.Core.Services
 {
     public interface ICaseRepository
     {
-        IEnumerable<Case> GetAll();
         void Insert(Case @case);
+        IEnumerable<Case> GetAll();
+        void Update(Case @case);
+        void Delete(int id);
     }
 }

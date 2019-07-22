@@ -14,6 +14,12 @@ namespace LinCon.Core.Services
       _pathProvider = pathProvider;
       _liteRepository = new LiteRepository($"Filename={_pathProvider.DbFileName};Mode=Exclusive");
     }
+
+    public void Delete(int id)
+    {
+      _liteRepository.Delete<Case>(id);
+    }
+
     public IEnumerable<Case> GetAll()
     {
       return _liteRepository.Query<Case>().ToList();
@@ -22,6 +28,11 @@ namespace LinCon.Core.Services
     public void Insert(Case @case)
     {
       _liteRepository.Insert<Case>(@case);
+    }
+
+    public void Update(Case @case)
+    {
+      _liteRepository.Update<Case>(@case);
     }
   }
 }
