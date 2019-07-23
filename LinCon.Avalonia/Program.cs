@@ -3,6 +3,8 @@ using Avalonia;
 using Avalonia.Logging.Serilog;
 using LinCon.Avalonia.ViewModels;
 using LinCon.Avalonia.Views;
+using ReactiveUI;
+using Splat;
 
 namespace LinCon.Avalonia
 {
@@ -15,10 +17,14 @@ namespace LinCon.Avalonia
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .LogToDebug()
-                .UseReactiveUI();
+        { 
+            Locator.CurrentMutable.Register(() => new MenuView(), typeof(IViewFor<MenuViewModel>));
+
+            return AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .LogToDebug()
+            .UseReactiveUI();
+        }
 
         // Your application's entry point. Here you can initialize your MVVM framework, DI
         // container, etc.
