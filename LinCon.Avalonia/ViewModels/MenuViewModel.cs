@@ -7,25 +7,24 @@ namespace LinCon.Avalonia.ViewModels
   public class MenuViewModel : ReactiveObject, IRoutableViewModel
   {
     public IScreen HostScreen { get; }
-    public string UrlPathSegment {get;} = Guid.NewGuid().ToString().Substring(0,5);
-    public ReactiveCommand<Unit,IRoutableViewModel> GoCaseExportView {get;}
-    public ReactiveCommand<Unit,IRoutableViewModel> GoCaseImportView {get;}
-    public ReactiveCommand<Unit,IRoutableViewModel> GoCaseExplorerView {get;}
-
+    public string UrlPathSegment {get;}
+    public ReactiveCommand<Unit,IRoutableViewModel> RouteCaseExport {get;}
+    public ReactiveCommand<Unit,IRoutableViewModel> RouteCaseImport {get;}
+    public ReactiveCommand<Unit,IRoutableViewModel> RouteCaseExplorer {get;}
 
     public MenuViewModel(IScreen screen)
     {
       HostScreen = screen;
 
-      GoCaseExportView = ReactiveCommand.CreateFromObservable(
+      RouteCaseExport = ReactiveCommand.CreateFromObservable(
         () => HostScreen.Router.Navigate.Execute(new CaseExportViewModel(HostScreen))
       );
 
-      GoCaseImportView = ReactiveCommand.CreateFromObservable(
+      RouteCaseImport = ReactiveCommand.CreateFromObservable(
         () => HostScreen.Router.Navigate.Execute(new CaseImportViewModel(HostScreen))
       );
 
-      GoCaseExplorerView = ReactiveCommand.CreateFromObservable(
+      RouteCaseExplorer = ReactiveCommand.CreateFromObservable(
         () => HostScreen.Router.Navigate.Execute(new CaseExplorerViewModel(HostScreen))
       );
     }

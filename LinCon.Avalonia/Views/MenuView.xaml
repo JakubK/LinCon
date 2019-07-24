@@ -10,9 +10,9 @@
         <StackPanel Grid.Column="1"
                 VerticalAlignment="Center"
                 Spacing="30">
-            <Button Command="{Binding GoCaseExplorerView}" >View Cases</Button>
-            <Button Command="{Binding GoCaseExportView}">Export Case</Button>
-            <Button Command="{Binding GoCaseImportView}">Import Case</Button>
+            <Button Command="{Binding RouteCaseExplorer}" >View Cases</Button>
+            <Button Command="{Binding RouteCaseExport}">Export Case</Button>
+            <Button Command="{Binding RouteCaseImport}">Import Case</Button>
         </StackPanel>
     </Grid>
 </UserControl>
