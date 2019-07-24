@@ -10,16 +10,11 @@ namespace LinCon.Avalonia.ViewModels
     {
         
         public RoutingState Router { get; } = new RoutingState();     
-        public ReactiveCommand<Unit, IRoutableViewModel> GoNext { get; }
         public ReactiveCommand<Unit, Unit> GoBack => Router.NavigateBack;
 
         public MainWindowViewModel()
         {
-            GoNext = ReactiveCommand.CreateFromObservable(
-                () => Router.Navigate.Execute(new MenuViewModel(this))
-            );
-
-            GoNext.Execute().Subscribe();
+            Router.Navigate.Execute(new MenuViewModel(this));
         }
     }
 }
