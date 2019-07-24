@@ -1,9 +1,18 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.MenuView">
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-        <TextBlock Text="Hi, I'm the Menu view!" />
-        <TextBlock Text="{Binding UrlPathSegment}" />
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" MinWidth="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"
+                VerticalAlignment="Center"
+                Spacing="30">
+            <Button Command="{Binding RouteCaseExplorer}" >View Cases</Button>
+            <Button Command="{Binding RouteCaseExport}">Export Case</Button>
+            <Button Command="{Binding RouteCaseImport}">Import Case</Button>
+        </StackPanel>
+    </Grid>
 </UserControl>
