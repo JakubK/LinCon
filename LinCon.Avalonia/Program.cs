@@ -16,15 +16,11 @@ namespace LinCon.Avalonia
         public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
 
         // Avalonia configuration, don't remove; also used by visual designer.
-        public static AppBuilder BuildAvaloniaApp()
-        { 
-            Locator.CurrentMutable.Register(() => new MenuView(), typeof(IViewFor<MenuViewModel>));
-
-            return AppBuilder.Configure<App>()
+        public static AppBuilder BuildAvaloniaApp() =>
+             AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .LogToDebug()
             .UseReactiveUI();
-        }
 
         // Your application's entry point. Here you can initialize your MVVM framework, DI
         // container, etc.
@@ -34,6 +30,11 @@ namespace LinCon.Avalonia
             {
                 DataContext = new MainWindowViewModel(),
             };
+
+            Locator.CurrentMutable.Register(() => new MenuView(), typeof(IViewFor<MenuViewModel>));
+            Locator.CurrentMutable.Register(() => new CaseExportView(), typeof(IViewFor<CaseExportViewModel>));
+            Locator.CurrentMutable.Register(() => new CaseImportView(), typeof(IViewFor<CaseImportViewModel>));
+            Locator.CurrentMutable.Register(() => new CaseExplorerView(), typeof(IViewFor<CaseExplorerViewModel>));
 
             app.Run(window);
         }
