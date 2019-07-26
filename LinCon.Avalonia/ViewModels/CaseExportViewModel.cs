@@ -9,15 +9,7 @@ namespace LinCon.Avalonia.ViewModels
 {
   public class CaseExportViewModel : ReactiveObject, IRoutableViewModel
   {
-    public CaseExportViewModel(IScreen hostScreen, string urlPathSegment, ReactiveCommand openSaveFileDialogCommand, ReactiveCommand exportCasesCommand) 
-        {
-          this.HostScreen = hostScreen;
-              this.UrlPathSegment = urlPathSegment;
-              this.OpenSaveFileDialogCommand = openSaveFileDialogCommand;
-              this.ExportCasesCommand = exportCasesCommand;
-               
-        }
-            public IScreen HostScreen { get; }
+    public IScreen HostScreen { get; }
     public string UrlPathSegment {get;} = System.Guid.NewGuid().ToString().Substring(0,5);
 
     string exportPath;
