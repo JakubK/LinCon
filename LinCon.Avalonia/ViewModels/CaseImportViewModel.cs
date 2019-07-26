@@ -39,6 +39,7 @@ namespace LinCon.Avalonia.ViewModels
     private async Task Import()
     {
       OpenFileDialog d = new OpenFileDialog();
+      d.AllowMultiple = true;
       var result =  await d.ShowAsync(new Window());
       if(result != null)
       {
