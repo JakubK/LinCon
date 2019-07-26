@@ -31,6 +31,12 @@ namespace LinCon.Core.Services
       _liteRepository.Insert<Case>(@case);
     }
 
+    public void Insert(IEnumerable<Case> cases)
+    {
+      foreach(var @case in cases)
+        Insert(@case);
+    }
+
     public void Update(Case @case)
     {
       _liteRepository.Update<Case>(@case);
