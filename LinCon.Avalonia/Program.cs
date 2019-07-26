@@ -3,6 +3,8 @@ using Avalonia;
 using Avalonia.Logging.Serilog;
 using LinCon.Avalonia.ViewModels;
 using LinCon.Avalonia.Views;
+using LinCon.Core.Services;
+using LinCon.Core.Services.Abstract;
 using ReactiveUI;
 using Splat;
 
@@ -13,7 +15,9 @@ namespace LinCon.Avalonia
         // Initialization code. Don't use any Avalonia, third-party APIs or any
         // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
         // yet and stuff might break.
-        public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
+        [STAThread]
+        public static void Main(string[] args)
+            => BuildAvaloniaApp().Start(AppMain, args);
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp() =>
@@ -30,6 +34,11 @@ namespace LinCon.Avalonia
             {
                 DataContext = new MainWindowViewModel(),
             };
+            
+            Locator.CurrentMutable.Register(() => new CaseImporter(), typeof(ICaseImporter));
+            Locator.CurrentMutable.Register(() => new PathProvider(), typeof(IPathProvider));
+            Locator.CurrentMutable.Register(() => new CaseRepository((Locator.CurrentMutable.GetService<IPathProvider>())), typeof(ICaseRepository));
+            Locator.CurrentMutable.Register(() => new CaseProcessor(), typeof(ICaseProcessor));
 
             Locator.CurrentMutable.Register(() => new MenuView(), typeof(IViewFor<MenuViewModel>));
             Locator.CurrentMutable.Register(() => new CaseExportView(), typeof(IViewFor<CaseExportViewModel>));
