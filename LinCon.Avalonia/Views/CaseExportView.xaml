@@ -19,7 +19,7 @@
                 <Button Command="{Binding OpenSaveFileDialogCommand}">Browse...</Button>
                 <TextBox Text="{Binding ExportPath}"/>
             </StackPanel>
-            <Button>Submit</Button>
+            <Button Command="{Binding ExportCasesCommand}">Submit</Button>
         </StackPanel>
     </StackPanel>
 </UserControl>
