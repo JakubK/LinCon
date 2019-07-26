@@ -54,7 +54,10 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand ExportCasesCommand {get;}
     private Task ExportCases()
     {
-      _caseExporter.Export(null,ExportPath);
+      var checkedItems = Cases.Where(x => x.IsChecked);
+      var allCases = _caseRepository.GetAll();
+      var casesToExport = allCases.Where(x => checkedItems.Any(y => y.ID == x.ID));
+      _caseExporter.Export(casesToExport,ExportPath);
       return Task.FromResult(0);
     }
   }
