@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Input;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -18,7 +20,9 @@ namespace LinCon.Avalonia.ViewModels
     public CaseImportViewModel(IScreen screen)
     { 
       HostScreen = screen;
+
       DropCommand = ReactiveCommand.CreateFromTask<DragEventArgs>(Drop);
+      ImportCommand = ReactiveCommand.CreateFromTask(Import);
       
       _caseRepository = Locator.Current.GetService<ICaseRepository>();
       _caseImporter = Locator.Current.GetService<ICaseImporter>();
@@ -29,6 +33,18 @@ namespace LinCon.Avalonia.ViewModels
       var cases = _caseImporter.Import(e.Data.GetFileNames());
       _caseRepository.Insert(cases);
       return Task.FromResult(0);
+    }
+
+    public ReactiveCommand ImportCommand {get;}
+    private async Task Import()
+    {
+      OpenFileDialog d = new OpenFileDialog();
+      var result =  await d.ShowAsync(new Window());
+      if(result != null)
+      {
+        var cases = _caseImporter.Import(result.ToList());
+       _caseRepository.Insert(cases);
+      }
     }
   }
 }
