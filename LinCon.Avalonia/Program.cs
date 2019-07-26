@@ -39,6 +39,7 @@ namespace LinCon.Avalonia
             Locator.CurrentMutable.Register(() => new PathProvider(), typeof(IPathProvider));
             Locator.CurrentMutable.Register(() => new CaseRepository((Locator.CurrentMutable.GetService<IPathProvider>())), typeof(ICaseRepository));
             Locator.CurrentMutable.Register(() => new CaseProcessor(), typeof(ICaseProcessor));
+            Locator.CurrentMutable.Register(() => new CaseExporter(), typeof(ICaseExporter));
 
             Locator.CurrentMutable.Register(() => new MenuView(), typeof(IViewFor<MenuViewModel>));
             Locator.CurrentMutable.Register(() => new CaseExportView(), typeof(IViewFor<CaseExportViewModel>));
