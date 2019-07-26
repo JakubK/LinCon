@@ -16,8 +16,8 @@
             </ScrollViewer>
             <TextBlock>Export here</TextBlock>
             <StackPanel Orientation="Horizontal">
-                <Button>Browse...</Button>
-                <TextBox>Path</TextBox>
+                <Button Command="{Binding OpenSaveFileDialogCommand}">Browse...</Button>
+                <TextBox Text="{Binding ExportPath}"/>
             </StackPanel>
             <Button>Submit</Button>
         </StackPanel>
