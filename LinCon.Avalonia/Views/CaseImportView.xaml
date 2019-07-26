@@ -12,7 +12,7 @@
             </Border>
             <TextBlock HorizontalAlignment="Center">Drag Cases here</TextBlock>
             <TextBlock HorizontalAlignment="Center">or</TextBlock>
-            <Button>Choose from your Computer</Button>
+            <Button Command="{Binding ImportCommand}">Choose from your Computer</Button>
         </StackPanel>
     </StackPanel>
 </UserControl>
