@@ -1,9 +1,27 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseExportView">
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-        <TextBlock Text="Hi, I'm the CaseExport view!" />
-        <TextBlock Text="{Binding UrlPathSegment}" />
+    <StackPanel VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
+        <StackPanel Orientation="Vertical"
+                Margin="0,16,0,0"
+                HorizontalAlignment="Center"
+                Spacing="16">
+            <TextBlock>Check the cases which you want to export</TextBlock>
+            <ScrollViewer Height="100">
+                <ListBox Items="{Binding Cases}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            <TextBlock>Export here</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding OpenSaveFileDialogCommand}">Browse...</Button>
+                <TextBox Text="{Binding ExportPath}"/>
+            </StackPanel>
+            <Button Command="{Binding ExportCasesCommand}">Submit</Button>
+        </StackPanel>
     </StackPanel>
 </UserControl>

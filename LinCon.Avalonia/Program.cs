@@ -1,8 +1,11 @@
 ﻿using System;
+using AutoMapper;
 using Avalonia;
 using Avalonia.Logging.Serilog;
+using LinCon.Avalonia.Models;
 using LinCon.Avalonia.ViewModels;
 using LinCon.Avalonia.Views;
+using LinCon.Core.Models;
 using LinCon.Core.Services;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -34,11 +37,19 @@ namespace LinCon.Avalonia
             {
                 DataContext = new MainWindowViewModel(),
             };
-            
+
+            var config = new MapperConfiguration(cfg =>
+            {
+               cfg.CreateMap<Case, ExportItem>(); 
+            });
+            var mapper = config.CreateMapper();
+
             Locator.CurrentMutable.Register(() => new CaseImporter(), typeof(ICaseImporter));
             Locator.CurrentMutable.Register(() => new PathProvider(), typeof(IPathProvider));
-            Locator.CurrentMutable.Register(() => new CaseRepository((Locator.CurrentMutable.GetService<IPathProvider>())), typeof(ICaseRepository));
+            Locator.CurrentMutable.RegisterLazySingleton(() => new CaseRepository((Locator.CurrentMutable.GetService<IPathProvider>())), typeof(ICaseRepository));
+            Locator.CurrentMutable.RegisterLazySingleton(() => mapper,typeof(IMapper));
             Locator.CurrentMutable.Register(() => new CaseProcessor(), typeof(ICaseProcessor));
+            Locator.CurrentMutable.Register(() => new CaseExporter(), typeof(ICaseExporter));
 
             Locator.CurrentMutable.Register(() => new MenuView(), typeof(IViewFor<MenuViewModel>));
             Locator.CurrentMutable.Register(() => new CaseExportView(), typeof(IViewFor<CaseExportViewModel>));
