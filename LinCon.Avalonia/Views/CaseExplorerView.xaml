@@ -16,7 +16,7 @@
                             <StackPanel Spacing="15" Orientation="Horizontal">
                                 <Button>View more</Button>
                                 <Button>Open Links</Button>
-                                <Button Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

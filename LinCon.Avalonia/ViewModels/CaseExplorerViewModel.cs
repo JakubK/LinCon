@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
 using LinCon.Avalonia.Models;
@@ -6,32 +8,44 @@ using LinCon.Core.Services.Abstract;
 using ReactiveUI;
 using Splat;
 
-namespace LinCon.Avalonia.ViewModels
+namespace LinCon.Avalonia.ViewModels 
 {
-  public class CaseExplorerViewModel : ReactiveObject, IRoutableViewModel
+  public class CaseExplorerViewModel : ReactiveObject, IRoutableViewModel 
   {
+    public CaseExplorerViewModel (IScreen hostScreen, string urlPathSegment) 
+    {
+      this.HostScreen = hostScreen;
+      this.UrlPathSegment = urlPathSegment;
+    }
     public IScreen HostScreen { get; }
-    public string UrlPathSegment {get;} = System.Guid.NewGuid().ToString().Substring(0,5);
-    public IEnumerable<ExportItem> Cases { get;set; }
+    public string UrlPathSegment { get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
+
+    private IEnumerable<ExportItem> cases;
+    public IEnumerable<ExportItem> Cases
+    {
+      get => cases;
+      set => this.RaiseAndSetIfChanged(ref cases,value);
+    }
 
     ICaseRepository _caseRepository;
     IMapper _mapper;
 
-    public CaseExplorerViewModel(IScreen screen)
-    {
+    public CaseExplorerViewModel (IScreen screen) {
       HostScreen = screen;
-      _caseRepository = Locator.Current.GetService<ICaseRepository>();
-      _mapper = Locator.Current.GetService<IMapper>();
+      _caseRepository = Locator.Current.GetService<ICaseRepository> ();
+      _mapper = Locator.Current.GetService<IMapper> ();
 
-      Cases = _mapper.Map<ExportItem[]>(_caseRepository.GetAll());
+      Cases = _mapper.Map<ExportItem[]> (_caseRepository.GetAll ());
 
-      DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
+      DeleteCommand = ReactiveCommand.CreateFromTask<int, Unit> (Delete);
     }
 
-    public ReactiveCommand DeleteCommand {get;}
-    private Task Delete()
+    public ReactiveCommand<int, Unit> DeleteCommand { get; }
+    private Task<Unit> Delete (int id) 
     {
-      return Task.FromResult(0);
+      _caseRepository.Delete(id);
+      Cases = Cases.Where(x => x.ID != id);
+      return Task.FromResult (Unit.Default);
     }
   }
 }
