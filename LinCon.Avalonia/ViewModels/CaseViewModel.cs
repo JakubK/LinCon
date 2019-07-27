@@ -8,7 +8,7 @@ namespace LinCon.Avalonia.ViewModels
 
     public IScreen HostScreen {get;set;} 
 
-    public CaseViewModel(IScreen screen)
+    public CaseViewModel(IScreen screen, int id)
     {
         HostScreen = screen;
     }

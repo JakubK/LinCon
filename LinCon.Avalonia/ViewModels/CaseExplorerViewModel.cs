@@ -71,7 +71,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand<int,Unit> ViewCaseCommand {get;}
     private Task<Unit> ViewCase(int id)
     {
-      HostScreen.Router.Navigate.Execute(new CaseViewModel(this));
+      HostScreen.Router.Navigate.Execute(new CaseViewModel(this,id));
       return Task.FromResult(Unit.Default);
     }
   }
