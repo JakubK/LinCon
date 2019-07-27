@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using LinCon.Avalonia.Models;
 using LinCon.Core.Services.Abstract;
@@ -23,6 +24,14 @@ namespace LinCon.Avalonia.ViewModels
       _mapper = Locator.Current.GetService<IMapper>();
 
       Cases = _mapper.Map<ExportItem[]>(_caseRepository.GetAll());
+
+      DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
+    }
+
+    public ReactiveCommand DeleteCommand {get;}
+    private Task Delete()
+    {
+      return Task.FromResult(0);
     }
   }
 }

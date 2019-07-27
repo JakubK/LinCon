@@ -1,11 +1,12 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Name="Root"
              x:Class="LinCon.Avalonia.Views.CaseExplorerView">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
         <TextBlock>Your cases</TextBlock>
         <StackPanel Orientation="Horizontal" Spacing="15">
             <Button>Add Case</Button>
-            <Button>Delete Cases</Button>
+            <Button Command="{Binding #Root.DataContext.DeleteCommand}">Delete Cases</Button>
         </StackPanel>
         <ScrollViewer>
             <ItemsControl Items="{Binding Cases}">
@@ -16,7 +17,7 @@
                             <StackPanel Spacing="15" Orientation="Horizontal">
                                 <Button>View more</Button>
                                 <Button>Open Links</Button>
-                                <Button>Delete</Button>
+                                <Button Command="{Binding #Root.DataContext.DeleteCommand}">Delete</Button>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
