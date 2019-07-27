@@ -1,9 +1,29 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rxui="clr-namespace:Avalonia;assembly=Avalonia.ReactiveUI"
              x:Class="LinCon.Avalonia.Views.CaseExplorerView">
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-        <TextBlock Text="Hi, I'm the CaseExplorerView view!" />
-        <TextBlock Text="{Binding UrlPathSegment}" />
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
+        <TextBlock>Your cases</TextBlock>
+        <StackPanel Orientation="Horizontal" Spacing="15">
+            <Button Command="{Binding AddCommand}">Add Case</Button>
+            <Button>Delete Cases</Button>
+        </StackPanel>
+        <ScrollViewer>
+            <ItemsControl Items="{Binding Cases}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="Pink" Orientation="Vertical" Spacing="10">
+                            <TextBlock Text="{Binding Name}"/>
+                            <StackPanel Spacing="15" Orientation="Horizontal">
+                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
+                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
+                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <rxui:RoutedViewHost Router="{Binding Router}"/>
     </StackPanel>
 </UserControl>

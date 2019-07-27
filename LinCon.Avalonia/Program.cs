@@ -55,6 +55,7 @@ namespace LinCon.Avalonia
             Locator.CurrentMutable.Register(() => new CaseExportView(), typeof(IViewFor<CaseExportViewModel>));
             Locator.CurrentMutable.Register(() => new CaseImportView(), typeof(IViewFor<CaseImportViewModel>));
             Locator.CurrentMutable.Register(() => new CaseExplorerView(), typeof(IViewFor<CaseExplorerViewModel>));
+            Locator.CurrentMutable.Register(() => new CaseView(), typeof(IViewFor<CaseViewModel>));
 
             app.Run(window);
         }
