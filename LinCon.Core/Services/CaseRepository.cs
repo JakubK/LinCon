@@ -26,6 +26,11 @@ namespace LinCon.Core.Services
       return _liteRepository.Query<Case>().ToList();
     }
 
+    public Case GetById(int id)
+    {
+      return _liteRepository.Query<Case>().Where(x => x.ID == id).First();
+    }
+
     public void Insert(Case @case)
     {
       _liteRepository.Insert<Case>(@case);
