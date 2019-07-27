@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rxui="clr-namespace:Avalonia;assembly=Avalonia.ReactiveUI"
              x:Class="LinCon.Avalonia.Views.CaseExplorerView">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
         <TextBlock>Your cases</TextBlock>
@@ -23,5 +24,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <rxui:RoutedViewHost Router="{Binding Router}"/>
     </StackPanel>
 </UserControl>
