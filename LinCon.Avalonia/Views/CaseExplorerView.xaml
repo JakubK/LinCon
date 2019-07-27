@@ -4,8 +4,8 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
         <TextBlock>Your cases</TextBlock>
         <StackPanel Orientation="Horizontal" Spacing="15">
-            <Button>Add Case</Button>
-            <Button Command="{Binding #Root.DataContext.DeleteCommand}">Delete Cases</Button>
+            <Button Command="{Binding AddCommand}">Add Case</Button>
+            <Button>Delete Cases</Button>
         </StackPanel>
         <ScrollViewer>
             <ItemsControl Items="{Binding Cases}">
