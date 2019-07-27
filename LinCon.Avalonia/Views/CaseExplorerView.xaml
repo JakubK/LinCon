@@ -1,9 +1,27 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseExplorerView">
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-        <TextBlock Text="Hi, I'm the CaseExplorerView view!" />
-        <TextBlock Text="{Binding UrlPathSegment}" />
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
+        <TextBlock>Your cases</TextBlock>
+        <StackPanel Orientation="Horizontal" Spacing="15">
+            <Button>Add Case</Button>
+            <Button>Delete Cases</Button>
+        </StackPanel>
+        <ScrollViewer>
+            <ItemsControl Items="{Binding Cases}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="Pink" Orientation="Vertical" Spacing="10">
+                            <TextBlock Text="{Binding Name}"/>
+                            <StackPanel Spacing="15" Orientation="Horizontal">
+                                <Button>View more</Button>
+                                <Button>Open Links</Button>
+                                <Button>Delete</Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </StackPanel>
 </UserControl>
