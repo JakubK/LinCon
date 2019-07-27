@@ -14,7 +14,7 @@
                         <StackPanel Background="Pink" Orientation="Vertical" Spacing="10">
                             <TextBlock Text="{Binding Name}"/>
                             <StackPanel Spacing="15" Orientation="Horizontal">
-                                <Button>View more</Button>
+                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
                                 <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
                                 <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
                             </StackPanel>

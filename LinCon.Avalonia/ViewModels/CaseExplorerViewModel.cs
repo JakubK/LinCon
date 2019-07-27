@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,8 +10,9 @@ using Splat;
 
 namespace LinCon.Avalonia.ViewModels 
 {
-  public class CaseExplorerViewModel : ReactiveObject, IRoutableViewModel 
+  public class CaseExplorerViewModel : ReactiveObject, IRoutableViewModel, IScreen
   {
+    public RoutingState Router { get; } = new RoutingState();
     public IScreen HostScreen { get; }
     public string UrlPathSegment { get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
 
@@ -40,6 +40,8 @@ namespace LinCon.Avalonia.ViewModels
       DeleteCommand = ReactiveCommand.CreateFromTask<int, Unit> (Delete);
       AddCommand = ReactiveCommand.CreateFromTask(Add);
       ExecuteCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ExecuteCase);
+      ViewCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ViewCase);
+
     }
 
     public ReactiveCommand<int, Unit> DeleteCommand { get; }
@@ -63,6 +65,13 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> ExecuteCase(int id)
     {
       _caseProcessor.ProcessCase(_caseRepository.GetById(id));
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand<int,Unit> ViewCaseCommand {get;}
+    private Task<Unit> ViewCase(int id)
+    {
+      HostScreen.Router.Navigate.Execute(new CaseViewModel(this));
       return Task.FromResult(Unit.Default);
     }
   }
