@@ -25,6 +25,7 @@ namespace LinCon.Avalonia.ViewModels
 
     ICaseRepository _caseRepository;
     IMapper _mapper;
+    ICaseProcessor _caseProcessor;
 
     public CaseExplorerViewModel (IScreen screen) 
     {
@@ -32,11 +33,13 @@ namespace LinCon.Avalonia.ViewModels
 
       _caseRepository = Locator.Current.GetService<ICaseRepository> ();
       _mapper = Locator.Current.GetService<IMapper> ();
+      _caseProcessor = Locator.Current.GetService<ICaseProcessor>();
 
       Cases = _mapper.Map<ExportItem[]> (_caseRepository.GetAll ());
 
       DeleteCommand = ReactiveCommand.CreateFromTask<int, Unit> (Delete);
       AddCommand = ReactiveCommand.CreateFromTask(Add);
+      ExecuteCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ExecuteCase);
     }
 
     public ReactiveCommand<int, Unit> DeleteCommand { get; }
@@ -54,6 +57,13 @@ namespace LinCon.Avalonia.ViewModels
       _caseRepository.Insert(c);
       Cases = _mapper.Map<List<ExportItem>> (_caseRepository.GetAll ());
       return Task.FromResult(0);
+    }
+
+    public ReactiveCommand<int,Unit> ExecuteCaseCommand {get;}
+    private Task<Unit> ExecuteCase(int id)
+    {
+      _caseProcessor.ProcessCase(_caseRepository.GetById(id));
+      return Task.FromResult(Unit.Default);
     }
   }
 }
