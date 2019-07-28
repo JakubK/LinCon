@@ -14,7 +14,7 @@
         </ScrollViewer>
         <StackPanel Orientation="Horizontal">
             <Button>Delete</Button>
-            <Button>Cancel</Button>
+            <Button Command="{Binding ReturnCommand}">Cancel</Button>
         </StackPanel>
     </StackPanel>
 </UserControl>

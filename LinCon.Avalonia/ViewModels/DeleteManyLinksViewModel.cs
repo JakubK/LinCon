@@ -33,6 +33,14 @@ namespace LinCon.Avalonia.ViewModels
 
         _parentView = parentView;
 
+        ReturnCommand = ReactiveCommand.CreateFromTask(Return);
     }   
+
+    public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
+    private Task<Unit> Return()
+    {
+      HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
+    }
   }
 }
