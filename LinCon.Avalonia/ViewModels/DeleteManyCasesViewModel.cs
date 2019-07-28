@@ -21,22 +21,44 @@ namespace LinCon.Avalonia.ViewModels
     ICaseRepository _caseRepository;
     IMapper _mapper;
 
-    public DeleteManyCasesViewModel(IScreen screen)
+    CaseExplorerViewModel _parent;
+
+    public DeleteManyCasesViewModel(IScreen screen, CaseExplorerViewModel parent)
     {
       HostScreen = screen;
 
       _caseRepository = Locator.Current.GetService<ICaseRepository>();
       _mapper = Locator.Current.GetService<IMapper>();
 
+      _parent = parent;
+
       CaseItems = _mapper.Map<List<ExportItem>>(_caseRepository.GetAll());
 
       ReturnCommand = ReactiveCommand.CreateFromTask(Return);
+      DeleteManyCommand = ReactiveCommand.CreateFromTask(DeleteMany);
     }   
 
     public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
     private Task<Unit> Return()
     {
       HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand DeleteManyCommand {get;set;}
+    private Task<Unit> DeleteMany()
+    {
+      var checkedItems = CaseItems.Where(x => x.IsChecked);
+      var allCases = _caseRepository.GetAll();
+      var casesToRemove = allCases.Where(x => checkedItems.Any(y => y.ID == x.ID));
+
+      foreach(var caseItem in casesToRemove)
+        _caseRepository.Delete(caseItem.ID);
+
+      _parent.RefreshCommand.Execute();
+
+      ReturnCommand.Execute();
+      
       return Task.FromResult(Unit.Default);
     }
   }
