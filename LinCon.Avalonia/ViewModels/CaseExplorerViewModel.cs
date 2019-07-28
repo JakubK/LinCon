@@ -62,9 +62,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddCommand {get;}
     private Task Add()
     {
-      Case c = new Case();
-      _caseRepository.Insert(c);
-      Cases = _mapper.Map<List<ExportItem>> (_caseRepository.GetAll ());
+      Router.Navigate.Execute(new AddCaseViewModel(this,this));
       return Task.FromResult(0);
     }
 
