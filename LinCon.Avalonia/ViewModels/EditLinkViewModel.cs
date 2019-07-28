@@ -38,7 +38,7 @@ namespace LinCon.Avalonia.ViewModels
 
     CaseViewModel _parentViewModel;
 
-    public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId)
+    public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, string link)
     {
         HostScreen = screen;
 
@@ -49,6 +49,7 @@ namespace LinCon.Avalonia.ViewModels
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
 
         Case = _caseRepository.GetById(caseId);
+        Link = link;
     }   
 
     public ReactiveCommand AddLinkCommand {get;}
