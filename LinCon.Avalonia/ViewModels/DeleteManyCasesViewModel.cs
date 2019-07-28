@@ -29,6 +29,15 @@ namespace LinCon.Avalonia.ViewModels
       _mapper = Locator.Current.GetService<IMapper>();
 
       CaseItems = _mapper.Map<List<ExportItem>>(_caseRepository.GetAll());
+
+      ReturnCommand = ReactiveCommand.CreateFromTask(Return);
     }   
+
+    public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
+    private Task<Unit> Return()
+    {
+      HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
+    }
   }
 }
