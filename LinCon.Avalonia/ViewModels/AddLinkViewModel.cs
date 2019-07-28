@@ -57,12 +57,12 @@ namespace LinCon.Avalonia.ViewModels
       Case.Links.Add(Link);
       _caseRepository.Update(Case);
 
-      Return();
+      ReturnCommand.Execute();
       _parentViewModel.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand ReturnCommand {get;}
+    public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
     private Task<Unit> Return()
     {
       HostScreen.Router.NavigateBack.Execute();
