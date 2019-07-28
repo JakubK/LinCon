@@ -7,7 +7,7 @@
         <StackPanel Orientation="Horizontal">
             <Button Command="{Binding AddLinkCommand}">Add link</Button>
             <Button Command="{Binding OpenAllLinksCommand}">Open links</Button>
-            <Button>Delete...</Button>
+            <Button Command="{Binding DeleteManyLinksCommand}">Delete...</Button>
         </StackPanel>
         <ItemsControl Items="{Binding Case.Links}">
             <ItemsControl.ItemTemplate>

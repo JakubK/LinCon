@@ -38,6 +38,7 @@ namespace LinCon.Avalonia.ViewModels
         AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
         RefreshCommand = ReactiveCommand.CreateFromTask<Unit>(Refresh);
         EditLinkCommand = ReactiveCommand.CreateFromTask<string,Unit>(EditLink);
+        DeleteManyLinksCommand = ReactiveCommand.CreateFromTask(DeleteManyLinks);
     }
 
     public ReactiveCommand<string, Unit> OpenLinkCommand {get;}
@@ -79,6 +80,13 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> EditLink(string link)
     {
       Router.Navigate.Execute(new EditLinkViewModel(this,this,Case.ID,link));
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand DeleteManyLinksCommand {get;}
+    private Task<Unit> DeleteManyLinks()
+    {
+      Router.Navigate.Execute(new DeleteManyLinksViewModel(this));
       return Task.FromResult(Unit.Default);
     }
   }
