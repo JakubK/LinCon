@@ -7,26 +7,10 @@ using Splat;
 
 namespace LinCon.Avalonia.ViewModels
 {
-  public class AddLinkViewModel : ReactiveObject, IRoutableViewModel
+  public class DeleteLinkViewModel : ReactiveObject, IRoutableViewModel
   {
     public string UrlPathSegment {get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
-
     public IScreen HostScreen {get;}
-
-    private string name;
-    public string Name
-    {
-      get => name;
-      set => this.RaiseAndSetIfChanged(ref name, value);
-    }
-
-    private string link;
-    public string Link
-    {
-      get => link;
-      set => this.RaiseAndSetIfChanged(ref link, value);
-    }
-
     ICaseRepository _caseRepository;
 
     private Case _case;
@@ -36,29 +20,34 @@ namespace LinCon.Avalonia.ViewModels
       set => this.RaiseAndSetIfChanged(ref _case, value);
     }
 
+    public string Link {get;set;}
+
     CaseViewModel _parentViewModel;
 
-    public AddLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId)
+    public DeleteLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, string link)
     {
         HostScreen = screen;
 
-        AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
+        DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
 
         _parentViewModel = parentViewModel;
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
 
         Case = _caseRepository.GetById(caseId);
+        Link = link;
     }   
 
-    public ReactiveCommand AddLinkCommand {get;}
-    private Task<Unit> AddLink()
+    public ReactiveCommand DeleteCommand {get;}
+
+    private Task<Unit> Delete()
     {
-      Case.Links.Add(Link);
+      Case.Links.Remove(Link);
       _caseRepository.Update(Case);
 
       ReturnCommand.Execute();
       _parentViewModel.RefreshCommand.Execute();
+      
       return Task.FromResult(Unit.Default);
     }
 
@@ -66,7 +55,6 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> Return()
     {
       HostScreen.Router.NavigateBack.Execute();
-
       return Task.FromResult(Unit.Default);
     }
   }
