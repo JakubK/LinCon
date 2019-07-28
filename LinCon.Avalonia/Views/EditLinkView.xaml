@@ -3,7 +3,7 @@
              x:Class="LinCon.Avalonia.Views.EditLinkView">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
        <TextBlock>New Link</TextBlock>
-       <TextBox Text="{Binding Link, Mode=TwoWay}"/>
+       <TextBox Text="{Binding Url, Mode=TwoWay}"/>
        <TextBlock>New Name</TextBlock>
        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
        <StackPanel Orientation="Horizontal">

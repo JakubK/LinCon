@@ -32,16 +32,17 @@ namespace LinCon.Avalonia.ViewModels
 
         Case = _caseRepository.GetById(id);
 
-        OpenLinkCommand = ReactiveCommand.CreateFromTask<string,Unit>(OpenLink);
+        OpenLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(OpenLink);
         OpenAllLinksCommand = ReactiveCommand.CreateFromTask(OpenAllLinks);
-        DeleteLinkCommand = ReactiveCommand.CreateFromTask<string,Unit>(DeleteLink);
+        DeleteLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(DeleteLink);
         AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
         RefreshCommand = ReactiveCommand.CreateFromTask<Unit>(Refresh);
-        EditLinkCommand = ReactiveCommand.CreateFromTask<string,Unit>(EditLink);
+        EditLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(EditLink);
+        DeleteManyLinksCommand = ReactiveCommand.CreateFromTask(DeleteManyLinks);
     }
 
-    public ReactiveCommand<string, Unit> OpenLinkCommand {get;}
-    private Task<Unit> OpenLink(string link)
+    public ReactiveCommand<Link, Unit> OpenLinkCommand {get;}
+    private Task<Unit> OpenLink(Link link)
     {
       _caseProcessor.ProcessLink(link);
       return Task.FromResult(Unit.Default);
@@ -54,8 +55,8 @@ namespace LinCon.Avalonia.ViewModels
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand<string,Unit> DeleteLinkCommand {get;}
-    private Task<Unit> DeleteLink(string link)
+    public ReactiveCommand<Link,Unit> DeleteLinkCommand {get;}
+    private Task<Unit> DeleteLink(Link link)
     {
       Router.Navigate.Execute(new DeleteLinkViewModel(this,this,Case.ID, link));
       return Task.FromResult(Unit.Default);
@@ -75,10 +76,17 @@ namespace LinCon.Avalonia.ViewModels
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand<string,Unit> EditLinkCommand {get;}
-    private Task<Unit> EditLink(string link)
+    public ReactiveCommand<Link,Unit> EditLinkCommand {get;}
+    private Task<Unit> EditLink(Link link)
     {
       Router.Navigate.Execute(new EditLinkViewModel(this,this,Case.ID,link));
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand DeleteManyLinksCommand {get;}
+    private Task<Unit> DeleteManyLinks()
+    {
+      Router.Navigate.Execute(new DeleteManyLinksViewModel(this,this, Case.ID));
       return Task.FromResult(Unit.Default);
     }
   }

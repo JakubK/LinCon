@@ -41,6 +41,7 @@ namespace LinCon.Avalonia
             var config = new MapperConfiguration(cfg =>
             {
                cfg.CreateMap<Case, ExportItem>(); 
+               cfg.CreateMap<Link, DeleteLinkItem>(); 
             });
             var mapper = config.CreateMapper();
 
@@ -58,6 +59,7 @@ namespace LinCon.Avalonia
             Locator.CurrentMutable.Register(() => new CaseView(), typeof(IViewFor<CaseViewModel>));
             Locator.CurrentMutable.Register(() => new AddLinkView(), typeof(IViewFor<AddLinkViewModel>));
             Locator.CurrentMutable.Register(() => new DeleteLinkView(), typeof(IViewFor<DeleteLinkViewModel>));
+            Locator.CurrentMutable.Register(() => new DeleteManyLinksView(), typeof(IViewFor<DeleteManyLinksViewModel>));
             Locator.CurrentMutable.Register(() => new EditLinkView(), typeof(IViewFor<EditLinkViewModel>));
 
             app.Run(window);

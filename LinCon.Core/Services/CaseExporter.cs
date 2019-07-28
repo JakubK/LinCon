@@ -15,7 +15,7 @@ namespace LinCon.Core.Services
         {
             foreach(var link in @case.Links)
             {
-                builder.Append(link);
+                builder.Append(link.Url);
                 builder.AppendLine();
             }
         }

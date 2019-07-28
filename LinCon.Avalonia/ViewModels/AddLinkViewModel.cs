@@ -54,7 +54,11 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddLinkCommand {get;}
     private Task<Unit> AddLink()
     {
-      Case.Links.Add(Link);
+      Case.Links.Add(new Link
+      {
+        Name = Name,
+        Url = Link
+      });
       _caseRepository.Update(Case);
 
       ReturnCommand.Execute();
