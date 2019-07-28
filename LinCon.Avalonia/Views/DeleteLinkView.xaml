@@ -2,6 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.DeleteLinkView">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-       <TextBlock>Link</TextBlock>
+       <StackPanel Orientation="Horizontal">
+          <TextBlock>Are you sure you want to delete the link </TextBlock>
+          <TextBlock Text="{Binding Link}"/>
+          <TextBlock>?</TextBlock>
+       </StackPanel>
+       <StackPanel Orientation="Horizontal">
+          <Button Command="{Binding DeleteCommand}">Delete</Button>
+          <Button Command="{Binding ReturnCommand}">Cancel</Button>
+       </StackPanel>
     </StackPanel>
 </UserControl>
