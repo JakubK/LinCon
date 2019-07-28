@@ -8,6 +8,6 @@ namespace LinCon.Core.Models
         [BsonId]
         public int ID {get;set;}
         public string Name { get;set; }
-        public List<string> Links {get;set;} = new List<string>();
+        public List<Link> Links {get;set;} = new List<Link>();
     }
 }

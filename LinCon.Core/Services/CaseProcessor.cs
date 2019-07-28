@@ -13,26 +13,26 @@ namespace LinCon.Core.Services
         ProcessLink(link);
     }
 
-    public void ProcessLink(string link)
+    public void ProcessLink(Link link)
     {
       try
       {
-          Process.Start(link);
+          Process.Start(link.Url);
       }
       catch
       {
           if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
           {
-              link = link.Replace("&", "^&");
-              Process.Start(new ProcessStartInfo("cmd", $"/c start {link}") { CreateNoWindow = true });
+              link.Url = link.Url.Replace("&", "^&");
+              Process.Start(new ProcessStartInfo("cmd", $"/c start {link.Url}") { CreateNoWindow = true });
           }
           else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
           {
-              Process.Start("xdg-open", link);
+              Process.Start("xdg-open", link.Url);
           }
           else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
           {
-              Process.Start("open", link);
+              Process.Start("open", link.Url);
           }
           else
           {

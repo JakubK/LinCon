@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using LinCon.Core.Models;
@@ -20,11 +21,11 @@ namespace LinCon.Avalonia.ViewModels
       set => this.RaiseAndSetIfChanged(ref name, value);
     }
 
-    private string link;
-    public string Link
+    private string url;
+    public string Url
     {
-      get => link;
-      set => this.RaiseAndSetIfChanged(ref link, value);
+      get => url;
+      set => this.RaiseAndSetIfChanged(ref url, value);
     }
 
     ICaseRepository _caseRepository;
@@ -38,9 +39,9 @@ namespace LinCon.Avalonia.ViewModels
 
     CaseViewModel _parentViewModel;
 
-    string oldLink;
+    Link oldLink;
 
-    public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, string link)
+    public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, Link link)
     {
         HostScreen = screen;
 
@@ -51,15 +52,24 @@ namespace LinCon.Avalonia.ViewModels
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
 
         Case = _caseRepository.GetById(caseId);
-        Link = link;
+
+        Name = link.Name;
+        Url = link.Url;
         oldLink = link;
     }   
 
     public ReactiveCommand EditCommand {get;}
     private Task<Unit> Edit()
     {
-      Case.Links.Remove(oldLink);
-      Case.Links.Add(Link);
+      var linkToRemove = Case.Links.Where(x => x.Url == oldLink.Url).First();      
+      Case.Links.Remove(linkToRemove);
+
+      Case.Links.Add(new Link
+      {
+        Name = Name,
+        Url = Url
+      });
+
       _caseRepository.Update(Case);
 
       ReturnCommand.Execute();

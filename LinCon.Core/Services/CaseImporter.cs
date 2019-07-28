@@ -17,7 +17,11 @@ namespace LinCon.Core.Services
             var linkParser = new Regex(@"\b(?:https?://|www\.)[^ \f\n\r\t\v\]]+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             foreach(Match m in linkParser.Matches(text))
             {
-                c.Links.Add(m.Value);
+                c.Links.Add(new Link
+                {
+                  Name = "",
+                  Url = m.Value
+                });
             }
 
             yield return c;

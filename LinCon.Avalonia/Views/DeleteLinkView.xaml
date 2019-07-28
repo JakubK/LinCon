@@ -4,7 +4,7 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
        <StackPanel Orientation="Horizontal">
           <TextBlock>Are you sure you want to delete the link </TextBlock>
-          <TextBlock Text="{Binding Link}"/>
+          <TextBlock Text="{Binding Link.Name}"/>
           <TextBlock>?</TextBlock>
        </StackPanel>
        <StackPanel Orientation="Horizontal">
