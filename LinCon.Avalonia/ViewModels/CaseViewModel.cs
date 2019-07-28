@@ -56,7 +56,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand<string,Unit> DeleteLinkCommand {get;}
     private Task<Unit> DeleteLink(string link)
     {
-      Router.Navigate.Execute(new DeleteLinkViewModel(this,this,Case.ID));
+      Router.Navigate.Execute(new DeleteLinkViewModel(this,this,Case.ID, link));
       return Task.FromResult(Unit.Default);
     }
 

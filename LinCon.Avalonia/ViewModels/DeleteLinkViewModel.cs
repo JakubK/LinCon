@@ -20,18 +20,22 @@ namespace LinCon.Avalonia.ViewModels
       set => this.RaiseAndSetIfChanged(ref _case, value);
     }
 
+    public string Link {get;set;}
+
     CaseViewModel _parentViewModel;
 
-    public DeleteLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId)
+    public DeleteLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, string link)
     {
         HostScreen = screen;
 
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
+        DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
 
         _parentViewModel = parentViewModel;
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
 
         Case = _caseRepository.GetById(caseId);
+        Link = link;
     }   
 
     public ReactiveCommand DeleteCommand {get;}
