@@ -41,7 +41,15 @@ namespace LinCon.Avalonia.ViewModels
       AddCommand = ReactiveCommand.CreateFromTask(Add);
       ExecuteCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ExecuteCase);
       ViewCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ViewCase);
+      DeleteManyCasesCommand = ReactiveCommand.CreateFromTask(DeleteManyCases);
+      RefreshCommand = ReactiveCommand.CreateFromTask(Refresh);
+    }
 
+    public ReactiveCommand<Unit,Unit> RefreshCommand {get;}
+    private Task<Unit> Refresh()
+    {
+      Cases = _mapper.Map<ExportItem[]>(_caseRepository.GetAll());
+      return Task.FromResult(Unit.Default);
     }
 
     public ReactiveCommand<int, Unit> DeleteCommand { get; }
@@ -72,6 +80,13 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> ViewCase(int id)
     {
       HostScreen.Router.Navigate.Execute(new CaseViewModel(this,id));
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand DeleteManyCasesCommand {get;}
+    private Task<Unit> DeleteManyCases()
+    {
+      Router.Navigate.Execute(new DeleteManyCasesViewModel(this,this));
       return Task.FromResult(Unit.Default);
     }
   }

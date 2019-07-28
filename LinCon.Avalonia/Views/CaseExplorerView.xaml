@@ -6,7 +6,7 @@
         <TextBlock>Your cases</TextBlock>
         <StackPanel Orientation="Horizontal" Spacing="15">
             <Button Command="{Binding AddCommand}">Add Case</Button>
-            <Button>Delete Cases</Button>
+            <Button Command="{Binding DeleteManyCasesCommand}">Delete Cases</Button>
         </StackPanel>
         <ScrollViewer>
             <ItemsControl Items="{Binding Cases}">
