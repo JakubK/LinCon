@@ -15,7 +15,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding }"/>
                         <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.OpenLinkCommand}">Open</Button>
-                        <Button>Edit</Button>
+                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.EditLinkCommand}">Edit</Button>
                         <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.DeleteLinkCommand}">Delete</Button>
                     </StackPanel>
                 </DataTemplate>
