@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rxui="clr-namespace:Avalonia;assembly=Avalonia.ReactiveUI"
+             x:Class="LinCon.Avalonia.Views.CaseView">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
+        <TextBlock Text="{Binding Case.Name}"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding AddLinkCommand}">Add link</Button>
+            <Button Command="{Binding OpenAllLinksCommand}">Open links</Button>
+            <Button Command="{Binding DeleteManyLinksCommand}">Delete...</Button>
+        </StackPanel>
+        <ItemsControl Items="{Binding Case.Links}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.OpenLinkCommand}">Open</Button>
+                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.EditLinkCommand}">Edit</Button>
+                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.DeleteLinkCommand}">Delete</Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>            
+        </ItemsControl>
+        <rxui:RoutedViewHost Router="{Binding Router}"/>
+    </StackPanel>
+</UserControl>
