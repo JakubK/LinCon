@@ -21,13 +21,18 @@ namespace LinCon.Avalonia.ViewModels
 
     IMapper _mapper;
 
-    public DeleteManyLinksViewModel(IScreen screen, int caseId)
+    CaseViewModel _parentView;
+
+    public DeleteManyLinksViewModel(IScreen screen, CaseViewModel parentView, int caseId)
     {
         HostScreen = screen;
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
         _mapper = Locator.Current.GetService<IMapper>();
         var _case = _caseRepository.GetById(caseId);
         DeleteLinkItems = _mapper.Map<List<DeleteLinkItem>>(_case.Links);
+
+        _parentView = parentView;
+
     }   
   }
 }
