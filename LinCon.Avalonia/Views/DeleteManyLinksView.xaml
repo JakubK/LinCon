@@ -13,7 +13,7 @@
             </ListBox>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal">
-            <Button>Delete</Button>
+            <Button Command="{Binding DeleteManyCommand}">Delete</Button>
             <Button Command="{Binding ReturnCommand}">Cancel</Button>
         </StackPanel>
     </StackPanel>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -23,23 +24,43 @@ namespace LinCon.Avalonia.ViewModels
 
     CaseViewModel _parentView;
 
+    Case Case;
+
     public DeleteManyLinksViewModel(IScreen screen, CaseViewModel parentView, int caseId)
     {
         HostScreen = screen;
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
         _mapper = Locator.Current.GetService<IMapper>();
-        var _case = _caseRepository.GetById(caseId);
-        DeleteLinkItems = _mapper.Map<List<DeleteLinkItem>>(_case.Links);
+
+        Case = _caseRepository.GetById(caseId);
+
+        DeleteLinkItems = _mapper.Map<List<DeleteLinkItem>>(Case.Links);
 
         _parentView = parentView;
 
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
+        DeleteManyCommand = ReactiveCommand.CreateFromTask(DeleteMany);
     }   
 
     public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
     private Task<Unit> Return()
     {
       HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand DeleteManyCommand {get;}
+    private Task<Unit> DeleteMany()
+    {
+      var checkedItems = DeleteLinkItems.Where(x => x.IsChecked);
+      var allLinks = Case.Links;
+      var linksToNotDelete = allLinks.Where(x => !checkedItems.Any(y => y.Url == x.Url)).ToList(); 
+
+      Case.Links = linksToNotDelete;
+      _caseRepository.Update(Case);
+
+      ReturnCommand.Execute();
+      _parentView.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
   }
