@@ -5,7 +5,7 @@
         <TextBlock Text="{Binding Case.Name}"/>
         <StackPanel Orientation="Horizontal">
             <Button>Add link</Button>
-            <Button>Open links</Button>
+            <Button Command="{Binding OpenAllLinksCommand}">Open links</Button>
             <Button>Delete...</Button>
         </StackPanel>
         <ItemsControl Items="{Binding Case.Links}">
@@ -15,7 +15,7 @@
                         <TextBlock Text="{Binding }"/>
                         <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.OpenLinkCommand}">Open</Button>
                         <Button>Edit</Button>
-                        <Button>Delete</Button>
+                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.DeleteLinkCommand}">Delete</Button>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>            
