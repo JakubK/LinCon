@@ -63,6 +63,8 @@ namespace LinCon.Avalonia
             Locator.CurrentMutable.Register(() => new DeleteManyCasesView(), typeof(IViewFor<DeleteManyCasesViewModel>));
             Locator.CurrentMutable.Register(() => new EditLinkView(), typeof(IViewFor<EditLinkViewModel>));
 
+            Locator.CurrentMutable.Register(() => new DeleteCaseView(), typeof(IViewFor<DeleteCaseViewModel>));
+
             app.Run(window);
         }
     }
