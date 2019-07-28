@@ -55,8 +55,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand<int, Unit> DeleteCommand { get; }
     private Task<Unit> Delete (int id) 
     {
-      _caseRepository.Delete(id);
-      Cases = _mapper.Map<List<ExportItem>> (_caseRepository.GetAll ());
+      Router.Navigate.Execute(new DeleteCaseViewModel(this,this,id));
       return Task.FromResult (Unit.Default);
     }
 
