@@ -13,7 +13,7 @@ namespace LinCon.Core.Services
         ProcessLink(link);
     }
 
-    void ProcessLink(string link)
+    public void ProcessLink(string link)
     {
       try
       {
