@@ -4,7 +4,7 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
         <TextBlock>Select the links which you want to delete</TextBlock>
         <ScrollViewer>
-            <ListBox Items="{Binding DeleteLinkItems}">
+            <ListBox Items="{Binding CaseItems}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>

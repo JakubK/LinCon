@@ -16,9 +16,19 @@ namespace LinCon.Avalonia.ViewModels
     public string UrlPathSegment {get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
     public IScreen HostScreen {get;}
 
-    public DeleteManyCasesViewModel(IScreen screen, CaseViewModel parentView, int caseId)
+    public List<ExportItem> CaseItems {get;set;}
+
+    ICaseRepository _caseRepository;
+    IMapper _mapper;
+
+    public DeleteManyCasesViewModel(IScreen screen)
     {
-        HostScreen = screen;
+      HostScreen = screen;
+
+      _caseRepository = Locator.Current.GetService<ICaseRepository>();
+      _mapper = Locator.Current.GetService<IMapper>();
+
+      CaseItems = _mapper.Map<List<ExportItem>>(_caseRepository.GetAll());
     }   
   }
 }
