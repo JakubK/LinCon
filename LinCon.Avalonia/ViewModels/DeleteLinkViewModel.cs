@@ -42,11 +42,16 @@ namespace LinCon.Avalonia.ViewModels
 
     private Task<Unit> Delete()
     {
+      Case.Links.Remove(Link);
+      _caseRepository.Update(Case);
+
+      ReturnCommand.Execute();
+      _parentViewModel.RefreshCommand.Execute();
       
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand ReturnCommand {get;}
+    public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
     private Task<Unit> Return()
     {
       HostScreen.Router.NavigateBack.Execute();
