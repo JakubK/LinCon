@@ -2,6 +2,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseView">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-        <TextBlock>Hello</TextBlock>
+        <TextBlock Text="{Binding Case.Name}"/>
+        <StackPanel Orientation="Horizontal">
+            <Button>Add link</Button>
+            <Button>Open links</Button>
+            <Button>Delete...</Button>
+        </StackPanel>
+        <ItemsControl Items="{Binding Case.Links}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding }"/>
+                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.OpenLinkCommand}">Open</Button>
+                        <Button>Edit</Button>
+                        <Button>Delete</Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>            
+        </ItemsControl>
     </StackPanel>
 </UserControl>
