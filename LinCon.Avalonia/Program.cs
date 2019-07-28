@@ -65,6 +65,8 @@ namespace LinCon.Avalonia
 
             Locator.CurrentMutable.Register(() => new DeleteCaseView(), typeof(IViewFor<DeleteCaseViewModel>));
             Locator.CurrentMutable.Register(() => new AddCaseView(), typeof(IViewFor<AddCaseViewModel>));
+            Locator.CurrentMutable.Register(() => new EditCaseView(), typeof(IViewFor<EditCaseViewModel>));
+
 
 
             app.Run(window);

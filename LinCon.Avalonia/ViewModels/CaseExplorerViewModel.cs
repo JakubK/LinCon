@@ -43,6 +43,14 @@ namespace LinCon.Avalonia.ViewModels
       ViewCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ViewCase);
       DeleteManyCasesCommand = ReactiveCommand.CreateFromTask(DeleteManyCases);
       RefreshCommand = ReactiveCommand.CreateFromTask(Refresh);
+      EditCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(EditCase);
+    }
+
+    public ReactiveCommand<int,Unit> EditCaseCommand {get;}
+    private Task<Unit> EditCase(int caseId)
+    {
+      Router.Navigate.Execute(new EditCaseViewModel(this,this,caseId));
+      return Task.FromResult(Unit.Default);
     }
 
     public ReactiveCommand<Unit,Unit> RefreshCommand {get;}
