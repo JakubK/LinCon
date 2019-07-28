@@ -7,7 +7,7 @@
        <TextBlock>New Name</TextBlock>
        <TextBox Text="{Binding Name, Mode=TwoWay}"/>
        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding EditLinkCommand}">Add</Button>
+            <Button Command="{Binding EditCommand}">Edit</Button>
             <Button Command="{Binding ReturnCommand}">Cancel</Button>
        </StackPanel>
     </StackPanel>

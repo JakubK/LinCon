@@ -38,11 +38,13 @@ namespace LinCon.Avalonia.ViewModels
 
     CaseViewModel _parentViewModel;
 
+    string oldLink;
+
     public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, string link)
     {
         HostScreen = screen;
 
-        EditLinkCommand = ReactiveCommand.CreateFromTask(EditLink);
+        EditCommand = ReactiveCommand.CreateFromTask(Edit);
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
 
         _parentViewModel = parentViewModel;
@@ -50,11 +52,13 @@ namespace LinCon.Avalonia.ViewModels
 
         Case = _caseRepository.GetById(caseId);
         Link = link;
+        oldLink = link;
     }   
 
-    public ReactiveCommand EditLinkCommand {get;}
-    private Task<Unit> EditLink()
+    public ReactiveCommand EditCommand {get;}
+    private Task<Unit> Edit()
     {
+      Case.Links.Remove(oldLink);
       Case.Links.Add(Link);
       _caseRepository.Update(Case);
 
