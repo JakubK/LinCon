@@ -26,7 +26,7 @@ namespace LinCon.Avalonia.ViewModels
     public CaseViewModel(IScreen screen, int id)
     {
         HostScreen = screen;
-        
+      
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
         _caseProcessor = Locator.Current.GetService<ICaseProcessor>();
 
@@ -36,6 +36,7 @@ namespace LinCon.Avalonia.ViewModels
         OpenAllLinksCommand = ReactiveCommand.CreateFromTask(OpenAllLinks);
         DeleteLinkCommand = ReactiveCommand.CreateFromTask<string,Unit>(DeleteLink);
         AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
+        RefreshCommand = ReactiveCommand.CreateFromTask<Unit>(Refresh);
     }
 
     public ReactiveCommand<string, Unit> OpenLinkCommand {get;}
@@ -64,7 +65,14 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddLinkCommand {get;}
     private Task<Unit> AddLink()
     {
-      Router.Navigate.Execute(new AddLinkViewModel(this));
+      Router.Navigate.Execute(new AddLinkViewModel(this,this,Case.ID));
+      return Task.FromResult(Unit.Default);
+    }
+
+    public ReactiveCommand<Unit,Unit> RefreshCommand {get;}
+    private Task<Unit> Refresh()
+    {
+      Case = _caseRepository.GetById(Case.ID);      
       return Task.FromResult(Unit.Default);
     }
   }
