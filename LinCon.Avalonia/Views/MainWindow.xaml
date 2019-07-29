@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         MinWidth="400"
+        Background="#EEEEEE"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LinCon.Avalonia.Views.MainWindow"
         Title="LinCon">
     <Grid>
-        <Button VerticalAlignment="Top" Height="30" Width="100" HorizontalAlignment="Left" Command="{Binding GoBack}">Go Back</Button>
         <rxui:RoutedViewHost Router="{Binding Router}"/>
     </Grid>
 </Window>
