@@ -1,18 +1,31 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.MenuView">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" MinWidth="300"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1"
-                VerticalAlignment="Center"
-                Spacing="30">
-            <Button Command="{Binding RouteCaseExplorer}" >View Cases</Button>
-            <Button Command="{Binding RouteCaseExport}">Export Case</Button>
-            <Button Command="{Binding RouteCaseImport}">Import Case</Button>
-        </StackPanel>
-    </Grid>
+    <UserControl.Styles>
+      <Style Selector="Button.menuItem">
+        <Setter Property="Margin" Value="9,3,9,3"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="Background" Value="#0097A7"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+      </Style>
+
+      <Style Selector="Button.menuItem /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="0 30 0 30"/>
+      </Style>
+      <Style Selector="Button.menuItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="Red"/>
+      </Style>
+    </UserControl.Styles>
+    <StackPanel MinWidth="300" MaxWidth="600"
+            VerticalAlignment="Center"
+            Spacing="30">
+        <Button Classes="menuItem" Background="#00796B"  Command="{Binding RouteCaseExplorer}">View Cases</Button>
+        <Button Classes="menuItem" Command="{Binding RouteCaseImport}">Import Case</Button>
+        <Button Classes="menuItem" Command="{Binding RouteCaseExport}">Export Case</Button>
+    </StackPanel>
 </UserControl>
