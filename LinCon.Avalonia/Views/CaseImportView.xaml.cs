@@ -11,7 +11,6 @@ namespace LinCon.Avalonia.Views
     public class CaseImportView : ReactiveUserControl<CaseImportViewModel>
     {
         private Border _DropState;
-        private Path _Path;
         public CaseImportView()
         {
             this.InitializeComponent();
@@ -33,7 +32,6 @@ namespace LinCon.Avalonia.Views
             AvaloniaXamlLoader.Load(this);
 
             _DropState = this.Find<Border>("DropState");
-            _Path = this.Find<Path>("Path");
         }
     }
 }
