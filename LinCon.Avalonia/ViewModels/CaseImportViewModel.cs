@@ -23,17 +23,9 @@ namespace LinCon.Avalonia.ViewModels
 
       DropCommand = ReactiveCommand.CreateFromTask<DragEventArgs>(Drop);
       ImportCommand = ReactiveCommand.CreateFromTask(Import);
-      ReturnCommand = ReactiveCommand.CreateFromTask(Return);
       
       _caseRepository = Locator.Current.GetService<ICaseRepository>();
       _caseImporter = Locator.Current.GetService<ICaseImporter>();
-    }
-
-    public ReactiveCommand ReturnCommand {get;}
-    private Task<Unit> Return()
-    {
-      HostScreen.Router.NavigateBack.Execute();
-      return Task.FromResult(Unit.Default);
     }
     public ReactiveCommand<DragEventArgs,Unit> DropCommand { get; }
     private Task Drop(DragEventArgs e)
