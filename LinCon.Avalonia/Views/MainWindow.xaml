@@ -12,7 +12,7 @@
      <Grid RowDefinitions="5,*,5" ColumnDefinitions="2,*,2">
         <DockPanel Grid.Column="1" Grid.Row="1" >
             <Grid Margin="-5 -5 -5 0" Height="40" Name="TitleBar" Background="White" DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto">
-                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">LinCon - Your Research Container</TextBlock>
+                <TextBlock Margin="120 0 0 0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">LinCon - Your Research Container</TextBlock>
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <StackPanel.Styles>
                         <Style Selector="Button">
