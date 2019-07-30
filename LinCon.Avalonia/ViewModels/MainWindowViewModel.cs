@@ -10,6 +10,7 @@ namespace LinCon.Avalonia.ViewModels
     {
         
         public RoutingState Router { get; } = new RoutingState();     
+        public ReactiveCommand<Unit, Unit> GoBack => Router.NavigateBack;
 
         public MainWindowViewModel()
         {
