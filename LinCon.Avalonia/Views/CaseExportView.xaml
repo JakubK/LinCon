@@ -65,7 +65,7 @@
                     </Grid>
                 </StackPanel>
             </StackPanel>
-            <Button FontSize="30" Grid.Row="2" Classes="exportBtn" Command="{Binding ExportCasesCommand}">Export</Button>
+            <Button BorderThickness="0" FontSize="30" Grid.Row="2" Classes="exportBtn" Command="{Binding ExportCasesCommand}">Export</Button>
         </Grid>
     </Border>
 </UserControl>
