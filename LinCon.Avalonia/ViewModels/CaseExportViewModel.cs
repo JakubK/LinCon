@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
 using Avalonia.Controls;
@@ -33,12 +34,20 @@ namespace LinCon.Avalonia.ViewModels
       HostScreen = screen;
       OpenSaveFileDialogCommand = ReactiveCommand.CreateFromTask(OpenSaveFileDialog);
       ExportCasesCommand = ReactiveCommand.CreateFromTask(ExportCases);
+      ReturnCommand = ReactiveCommand.CreateFromTask(Return);
 
       _caseExporter = Locator.Current.GetService<ICaseExporter>();
       _caseRepository = Locator.Current.GetService<ICaseRepository>();
       _mapper = Locator.Current.GetService<IMapper>();
 
       Cases = _mapper.Map<ExportItem[]>(_caseRepository.GetAll());
+    }
+
+    public ReactiveCommand ReturnCommand {get;}
+    private Task<Unit> Return()
+    {
+      HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
     }
     public ReactiveCommand OpenSaveFileDialogCommand {get;}
     private async Task OpenSaveFileDialog()
