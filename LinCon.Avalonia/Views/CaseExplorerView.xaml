@@ -34,48 +34,50 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
     </UserControl.Styles>
-    <Grid Width="1088" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <StackPanel Spacing="15">
-            <StackPanel Spacing="15" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" Spacing="15">
-                    <Button Width="50" Height="50" Command="{Binding ReturnCommand}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Path RenderTransformOrigin="0.5 0.5" Fill="Black" Data="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-                                    <Path.RenderTransform>
-                                        <ScaleTransform ScaleX="0.09" ScaleY="0.09"/>
-                                    </Path.RenderTransform>
-                                </Path>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <TextBlock FontSize="30" Foreground="#0D47A1">Your cases</TextBlock>
+        <Grid>
+            <Border Padding="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel Spacing="15">
+                    <StackPanel Spacing="15" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                            <Button Width="50" Height="50" Command="{Binding ReturnCommand}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Path RenderTransformOrigin="0.5 0.5" Fill="Black" Data="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
+                                            <Path.RenderTransform>
+                                                <ScaleTransform ScaleX="0.09" ScaleY="0.09"/>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <TextBlock FontSize="30" Foreground="#0D47A1">Your cases</TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="15 0 0 0" Orientation="Horizontal" Spacing="15">
+                            <Button Classes="greenBtn" Command="{Binding AddCommand}">Add Case</Button>
+                            <Button Classes="redBtn" Command="{Binding DeleteManyCasesCommand}">Delete Cases</Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <ScrollViewer Height="200">
+                        <ItemsControl Items="{Binding Cases}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0 20 0 0" Padding="20 10 20 10"  Background="White" CornerRadius="10">
+                                        <StackPanel Orientation="Vertical" Spacing="10">
+                                            <TextBlock Foreground="#0D47A1" Text="{Binding Name}"/>
+                                            <StackPanel Spacing="15" Orientation="Horizontal">
+                                                <Button Classes="greenBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
+                                                <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
+                                                <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
+                                                <Button Classes="redBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </StackPanel>
-                <StackPanel Margin="15 0 0 0" Orientation="Horizontal" Spacing="15">
-                    <Button Classes="greenBtn" Command="{Binding AddCommand}">Add Case</Button>
-                    <Button Classes="redBtn" Command="{Binding DeleteManyCasesCommand}">Delete Cases</Button>
-                </StackPanel>
-            </StackPanel>
-            <ScrollViewer Height="200">
-                <ItemsControl Items="{Binding Cases}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Margin="0 20 0 0" Padding="20 10 20 10"  Background="White" CornerRadius="10">
-                                <StackPanel Orientation="Vertical" Spacing="10">
-                                    <TextBlock Foreground="#0D47A1" Text="{Binding Name}"/>
-                                    <StackPanel Spacing="15" Orientation="Horizontal">
-                                        <Button Classes="greenBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
-                                        <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
-                                        <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
-                                        <Button Classes="redBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </StackPanel>
-        <rxui:RoutedViewHost Router="{Binding Router}"/>
-    </Grid>
+            </Border>
+            <rxui:RoutedViewHost Router="{Binding Router}"/>
+        </Grid>
 </UserControl>
