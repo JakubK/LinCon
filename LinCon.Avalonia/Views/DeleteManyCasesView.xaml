@@ -1,20 +1,25 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.DeleteManyCasesView">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-        <TextBlock>Select the links which you want to delete</TextBlock>
-        <ScrollViewer>
-            <ListBox Items="{Binding CaseItems}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding DeleteManyCommand}">Delete</Button>
-            <Button Command="{Binding ReturnCommand}">Cancel</Button>
-        </StackPanel>
-    </StackPanel>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Background="Black" Opacity="0.5"/>
+        <Border Padding="30" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
+            <StackPanel Spacing="15" Orientation="Vertical">
+                <TextBlock>Select the links which you want to delete</TextBlock>
+                <ScrollViewer>
+                    <ListBox Items="{Binding CaseItems}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+                <StackPanel HorizontalAlignment="Center" Spacing="10" Orientation="Horizontal">
+                    <Button Command="{Binding DeleteManyCommand}">Delete</Button>
+                    <Button Command="{Binding ReturnCommand}">Cancel</Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
 </UserControl>
