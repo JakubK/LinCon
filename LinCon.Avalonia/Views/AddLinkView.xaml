@@ -38,7 +38,7 @@
                         <Button Classes="closeBtn" Grid.Column="1" Command="{Binding ReturnCommand}">X</Button>
                     </Grid>
                 </Border>
-                <StackPanel Spacing="5" Orientation="Vertical">
+                <StackPanel MinWidth="300" Spacing="5" Orientation="Vertical">
                     <TextBlock>Link</TextBlock>
                     <TextBox Text="{Binding Link, Mode=TwoWay}"/>
                     <TextBlock>Name</TextBlock>
