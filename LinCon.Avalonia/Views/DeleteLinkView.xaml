@@ -45,7 +45,7 @@
             <StackPanel Spacing="30" Orientation="Vertical">
                 <Border Margin="-30 0 -30 0" Background="#EEEEEE" CornerRadius="5 5 0 0">
                     <Grid Height="40" ColumnDefinitions="* 50">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0">Delete Case</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0">Delete Link</TextBlock>
                         <Button Classes="closeBtn" Grid.Column="1" Command="{Binding ReturnCommand}">X</Button>
                     </Grid>
                 </Border>
