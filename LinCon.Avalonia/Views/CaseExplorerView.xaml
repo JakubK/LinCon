@@ -58,7 +58,7 @@
                         </StackPanel>
                     </StackPanel>
                     <Grid Grid.Row="1">
-                        <ScrollViewer>
+                        <ScrollViewer Padding="0 0 10 0">
                             <ItemsControl Items="{Binding Cases}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
