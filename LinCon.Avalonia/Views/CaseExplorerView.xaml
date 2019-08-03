@@ -36,7 +36,7 @@
     </UserControl.Styles>
         <Grid>
             <Border Padding="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <StackPanel Spacing="15">
+                <Grid RowDefinitions="130 *">
                     <StackPanel Spacing="15" Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Spacing="15">
                             <Button Width="50" Height="50" Command="{Binding ReturnCommand}">
@@ -57,26 +57,28 @@
                             <Button Classes="redBtn" Command="{Binding DeleteManyCasesCommand}">Delete Cases</Button>
                         </StackPanel>
                     </StackPanel>
-                    <ScrollViewer Height="200">
-                        <ItemsControl Items="{Binding Cases}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Margin="0 20 0 0" Padding="20 10 20 10"  Background="White" CornerRadius="10">
-                                        <StackPanel Orientation="Vertical" Spacing="10">
-                                            <TextBlock Foreground="#0D47A1" Text="{Binding Name}"/>
-                                            <StackPanel Spacing="15" Orientation="Horizontal">
-                                                <Button Classes="greenBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
-                                                <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
-                                                <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
-                                                <Button Classes="redBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                    <Grid Grid.Row="1">
+                        <ScrollViewer>
+                            <ItemsControl Items="{Binding Cases}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0 20 0 0" Padding="20 10 20 10"  Background="White" CornerRadius="10">
+                                            <StackPanel Orientation="Vertical" Spacing="10">
+                                                <TextBlock Foreground="#0D47A1" Text="{Binding Name}"/>
+                                                <StackPanel Spacing="15" Orientation="Horizontal">
+                                                    <Button Classes="greenBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
+                                                    <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
+                                                    <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
+                                                    <Button Classes="redBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                                                </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
             </Border>
             <rxui:RoutedViewHost Router="{Binding Router}"/>
         </Grid>
