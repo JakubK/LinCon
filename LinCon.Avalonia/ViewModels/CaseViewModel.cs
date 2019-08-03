@@ -39,6 +39,13 @@ namespace LinCon.Avalonia.ViewModels
         RefreshCommand = ReactiveCommand.CreateFromTask<Unit>(Refresh);
         EditLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(EditLink);
         DeleteManyLinksCommand = ReactiveCommand.CreateFromTask(DeleteManyLinks);
+        ReturnCommand = ReactiveCommand.CreateFromTask(Return);
+    }
+    public ReactiveCommand<Unit,Unit> ReturnCommand {get;}
+    private Task<Unit> Return()
+    {
+      HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
     }
 
     public ReactiveCommand<Link, Unit> OpenLinkCommand {get;}
