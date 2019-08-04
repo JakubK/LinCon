@@ -13,15 +13,17 @@ namespace LinCon.Core.Services
         foreach(var path in paths)
         {
             Case c = new Case();
+            c.Name = Path.GetFileName(path);
             string text = string.Join("\n",File.ReadAllLines(path));
             var linkParser = new Regex(@"\b(?:https?://|www\.)[^ \f\n\r\t\v\]]+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            foreach(Match m in linkParser.Matches(text))
+            var matches = linkParser.Matches(text);
+            for(int i = 0;i < matches.Count;i++)
             {
-                c.Links.Add(new Link
-                {
-                  Name = "",
-                  Url = m.Value
-                });
+              c.Links.Add(new Link
+              {
+                Url = matches[i].Value,
+                Name= "Url " + i
+              });
             }
 
             yield return c;
