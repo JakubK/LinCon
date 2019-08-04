@@ -44,6 +44,25 @@
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+
+        <Style Selector="Button.exportBtn">
+            <Setter Property="Background" Value="#0097A7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+        </Style>
+        <Style Selector=".exportBtn /template/ ContentPresenter">
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
+    
+        <Style Selector="Button.browseBtn">
+            <Setter Property="Background" Value="#0097A7"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+        </Style>
+        <Style Selector=".browseBtn /template/ ContentPresenter">
+            <Setter Property="CornerRadius" Value="5 0 0 5"/>
+        </Style>
      </Window.Styles>
      <Grid RowDefinitions="5,*,5" ColumnDefinitions="2,*,2">
         <DockPanel Grid.Column="1" Grid.Row="1" >

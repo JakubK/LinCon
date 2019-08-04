@@ -1,27 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseExportView">
-    <UserControl.Styles>
-      <Style Selector="Button.exportBtn">
-        <Setter Property="Background" Value="#0097A7"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Cursor" Value="Hand"></Setter>
-      </Style>
-      <Style Selector=".exportBtn /template/ ContentPresenter">
-        <Setter Property="CornerRadius" Value="15"/>
-      </Style>
-    
-      <Style Selector="Button.browseBtn">
-        <Setter Property="Background" Value="#0097A7"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Cursor" Value="Hand"></Setter>
-      </Style>
-      <Style Selector=".browseBtn /template/ ContentPresenter">
-        <Setter Property="CornerRadius" Value="5 0 0 5"/>
-      </Style>
-
-    </UserControl.Styles>
     <Border Width="1088" Height="600" Background="White" CornerRadius="15">
         <Grid RowDefinitions="70 * 70">     
             <StackPanel Margin="50 20 0 0" VerticalAlignment="Center" Spacing="20" Orientation="Horizontal">
