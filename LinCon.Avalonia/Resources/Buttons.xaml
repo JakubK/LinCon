@@ -92,4 +92,13 @@
       <Style Selector="Button.menuItem:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="Red"/>
       </Style>
+
+      <Style Selector="Button.captionBtn">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+        </Style>
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="#EEEEEE"></Setter>
+        </Style>
 </Styles>
