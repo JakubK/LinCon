@@ -1,16 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseImportView">
-    <UserControl.Styles>
-      <Style Selector="Button.fromComputerBtn">
-        <Setter Property="Background" Value="#0097A7"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Cursor" Value="Hand"></Setter>
-      </Style>
-      <Style Selector=".fromComputerBtn /template/ ContentPresenter">
-        <Setter Property="CornerRadius" Value="15"/>
-      </Style>
-    </UserControl.Styles>
     <Border Width="1088" Height="600" CornerRadius="15" BorderBrush="White" BorderThickness="1" Background="White">
         <Grid>
             <Grid.RowDefinitions>

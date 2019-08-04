@@ -48,7 +48,7 @@
         <Style Selector="Button.exportBtn">
             <Setter Property="Background" Value="#0097A7"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
         <Style Selector=".exportBtn /template/ ContentPresenter">
             <Setter Property="CornerRadius" Value="15"/>
@@ -58,10 +58,18 @@
             <Setter Property="Background" Value="#0097A7"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Cursor" Value="Hand"/>
         </Style>
         <Style Selector=".browseBtn /template/ ContentPresenter">
             <Setter Property="CornerRadius" Value="5 0 0 5"/>
+        </Style>
+        <Style Selector="Button.fromComputerBtn">
+            <Setter Property="Background" Value="#0097A7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector=".fromComputerBtn /template/ ContentPresenter">
+            <Setter Property="CornerRadius" Value="15"/>
         </Style>
      </Window.Styles>
      <Grid RowDefinitions="5,*,5" ColumnDefinitions="2,*,2">
