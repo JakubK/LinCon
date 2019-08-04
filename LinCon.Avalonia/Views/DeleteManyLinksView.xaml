@@ -1,22 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.DeleteManyLinksView">
-    <!-- <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-        <TextBlock>Select the links which you want to delete</TextBlock>
-        <ScrollViewer>
-            <ListBox Items="{Binding DeleteLinkItems}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding DeleteManyCommand}">Delete</Button>
-            <Button Command="{Binding ReturnCommand}">Cancel</Button>
-        </StackPanel>
-    </StackPanel> -->
     <UserControl.Styles>
         <Style Selector="Button">
             <Setter Property="Cursor" Value="Hand"/>
