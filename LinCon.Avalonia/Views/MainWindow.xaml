@@ -11,6 +11,7 @@
         Title="LinCon">
      <Window.Styles>
         <StyleInclude Source="avares://LinCon.Avalonia/Resources/Buttons.xaml"/>
+        <StyleInclude Source="avares://LinCon.Avalonia/Resources/Icons.xaml"/>
      </Window.Styles>
      <Grid RowDefinitions="5,*,5" ColumnDefinitions="2,*,2">
         <DockPanel Grid.Column="1" Grid.Row="1" >
