@@ -15,7 +15,9 @@ namespace LinCon.Core.Services
         {
             if(Path.GetExtension(path) == ".lc")
             {
-              yield return JsonConvert.DeserializeObject<Case>(string.Join(string.Empty,File.ReadAllLines(path)));
+              var cases = JsonConvert.DeserializeObject<Case[]>(string.Join(string.Empty,File.ReadAllLines(path)));
+              foreach(var caseItem in cases)
+                yield return caseItem;
             }
             else
             {
