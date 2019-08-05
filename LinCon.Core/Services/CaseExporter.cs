@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
+using Newtonsoft.Json;
 
 namespace LinCon.Core.Services
 {
@@ -10,16 +11,7 @@ namespace LinCon.Core.Services
   {
     public void Export(IEnumerable<Case> cases, string path)
     {
-        StringBuilder builder = new StringBuilder();
-        foreach(var @case in cases)
-        {
-            foreach(var link in @case.Links)
-            {
-                builder.Append(link.Url);
-                builder.AppendLine();
-            }
-        }
-        File.WriteAllText(path,builder.ToString());
+        File.WriteAllText(path, JsonConvert.SerializeObject(cases));
     }
   }
 }
