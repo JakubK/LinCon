@@ -37,7 +37,7 @@ namespace LinCon.Avalonia
             {
                 DataContext = new MainWindowViewModel(),
             };
-
+        
             var config = new MapperConfiguration(cfg =>
             {
                cfg.CreateMap<Case, ExportItem>(); 
@@ -66,8 +66,6 @@ namespace LinCon.Avalonia
             Locator.CurrentMutable.Register(() => new DeleteCaseView(), typeof(IViewFor<DeleteCaseViewModel>));
             Locator.CurrentMutable.Register(() => new AddCaseView(), typeof(IViewFor<AddCaseViewModel>));
             Locator.CurrentMutable.Register(() => new EditCaseView(), typeof(IViewFor<EditCaseViewModel>));
-
-
 
             app.Run(window);
         }
