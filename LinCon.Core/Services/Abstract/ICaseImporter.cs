@@ -5,6 +5,6 @@ namespace LinCon.Core.Services.Abstract
 {
     public interface ICaseImporter
     {
-        IEnumerable<Case> Import(IEnumerable<string> paths);
+        IEnumerable<Case> Import(params string[] paths);
     }
 }

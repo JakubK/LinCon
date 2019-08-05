@@ -38,7 +38,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand<DragEventArgs,Unit> DropCommand { get; }
     private Task Drop(DragEventArgs e)
     {
-      var cases = _caseImporter.Import(e.Data.GetFileNames());
+      var cases = _caseImporter.Import(e.Data.GetFileNames().ToArray());
       _caseRepository.Insert(cases);
       return Task.FromResult(0);
     }
@@ -51,7 +51,7 @@ namespace LinCon.Avalonia.ViewModels
       var result =  await d.ShowAsync(new Window());
       if(result != null)
       {
-        var cases = _caseImporter.Import(result.ToList());
+        var cases = _caseImporter.Import(result.ToArray());
        _caseRepository.Insert(cases);
       }
     }
