@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using AutoMapper;
 using Avalonia;
 using Avalonia.Logging.Serilog;
@@ -20,7 +21,30 @@ namespace LinCon.Avalonia
         // yet and stuff might break.
         [STAThread]
         public static void Main(string[] args)
-            => BuildAvaloniaApp().Start(AppMain, args);
+        {
+            bool runApp = true;
+
+            CaseImporter importer = new CaseImporter();
+            CaseProcessor processor = new CaseProcessor();
+            foreach(string arg in args)
+            {
+                if(File.Exists(arg))
+                {
+                    runApp = false;
+                    
+                    var cases = importer.Import(arg);
+                    foreach(var caseItem in cases)
+                    {
+                        processor.ProcessCase(caseItem);
+                    }
+                }
+            }
+
+            if(!runApp)
+                return;
+
+            BuildAvaloniaApp().Start(AppMain, args);
+        }
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp() =>
