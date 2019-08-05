@@ -53,6 +53,8 @@ namespace LinCon.Avalonia.ViewModels
     private async Task OpenSaveFileDialog()
     {
       SaveFileDialog d = new SaveFileDialog();
+      d.Filters.Add(new FileDialogFilter{ Name="Lincon Case", Extensions= { "lc"}});
+      d.Filters.Add(new FileDialogFilter{ Name="All", Extensions= { "*"}});
       var result = await d.ShowAsync(new Window());
       if(result != null)
       {
