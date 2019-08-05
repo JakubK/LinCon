@@ -8,7 +8,7 @@
         </StackPanel>
         <Border Grid.Row="1" Margin="0 30 0 30" Padding="30" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
             <Grid RowDefinitions="50 * 120">
-                <TextBlock HorizontalAlignment="Center">Select the Cases which you want to delete</TextBlock>
+                <TextBlock HorizontalAlignment="Center">Select the Cases which you want to Export</TextBlock>
                 <ScrollViewer MinWidth="400" Padding="20" Grid.Row="1" HorizontalAlignment="Stretch">
                     <ItemsControl BorderThickness="0" Items="{Binding Cases}">
                         <ItemsControl.ItemTemplate>
