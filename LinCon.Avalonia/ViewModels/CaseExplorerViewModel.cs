@@ -16,8 +16,8 @@ namespace LinCon.Avalonia.ViewModels
     public IScreen HostScreen { get; }
     public string UrlPathSegment { get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
 
-    private ObservableCollection<ExportItem> cases;
-    public ObservableCollection<ExportItem> Cases
+    private ObservableCollection<CaseItem> cases;
+    public ObservableCollection<CaseItem> Cases
     {
       get => cases;
       set => this.RaiseAndSetIfChanged(ref cases,value);
@@ -35,14 +35,13 @@ namespace LinCon.Avalonia.ViewModels
       _mapper = Locator.Current.GetService<IMapper> ();
       _caseProcessor = Locator.Current.GetService<ICaseProcessor>();
 
-      Cases = _mapper.Map<ObservableCollection<ExportItem>> (_caseRepository.GetAll ());
+      Cases = _mapper.Map<ObservableCollection<CaseItem>> (_caseRepository.GetAll ());
 
-      DeleteCommand = ReactiveCommand.CreateFromTask<int, Unit> (Delete);
+      DeleteCommand = ReactiveCommand.CreateFromTask<CaseItem, Unit> (Delete);
       AddCommand = ReactiveCommand.CreateFromTask(Add);
       ExecuteCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ExecuteCase);
       ViewCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(ViewCase);
       DeleteManyCasesCommand = ReactiveCommand.CreateFromTask(DeleteManyCases);
-      RefreshCommand = ReactiveCommand.CreateFromTask(Refresh);
       EditCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(EditCase);
       ReturnCommand = ReactiveCommand.CreateFromTask(Return);
     }
@@ -61,17 +60,10 @@ namespace LinCon.Avalonia.ViewModels
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand<Unit,Unit> RefreshCommand {get;}
-    private Task<Unit> Refresh()
+    public ReactiveCommand<CaseItem, Unit> DeleteCommand { get; }
+    private Task<Unit> Delete (CaseItem item) 
     {
-      Cases = _mapper.Map<ExportItem[]>(_caseRepository.GetAll());
-      return Task.FromResult(Unit.Default);
-    }
-
-    public ReactiveCommand<int, Unit> DeleteCommand { get; }
-    private Task<Unit> Delete (int id) 
-    {
-      Router.Navigate.Execute(new DeleteCaseViewModel(this,this,id));
+      Router.Navigate.Execute(new DeleteCaseViewModel(this,this,item));
       return Task.FromResult (Unit.Default);
     }
 
