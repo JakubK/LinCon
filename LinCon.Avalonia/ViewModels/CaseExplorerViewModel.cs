@@ -3,7 +3,6 @@ using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
 using LinCon.Avalonia.Models;
-using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
 using Splat;
@@ -44,6 +43,14 @@ namespace LinCon.Avalonia.ViewModels
       DeleteManyCasesCommand = ReactiveCommand.CreateFromTask(DeleteManyCases);
       RefreshCommand = ReactiveCommand.CreateFromTask(Refresh);
       EditCaseCommand = ReactiveCommand.CreateFromTask<int,Unit>(EditCase);
+      ReturnCommand = ReactiveCommand.CreateFromTask(Return);
+    }
+
+    public ReactiveCommand ReturnCommand {get;}
+    private Task<Unit> Return()
+    {
+      HostScreen.Router.NavigateBack.Execute();
+      return Task.FromResult(Unit.Default);
     }
 
     public ReactiveCommand<int,Unit> EditCaseCommand {get;}
@@ -84,7 +91,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand<int,Unit> ViewCaseCommand {get;}
     private Task<Unit> ViewCase(int id)
     {
-      HostScreen.Router.Navigate.Execute(new CaseViewModel(this,id));
+      HostScreen.Router.Navigate.Execute(new CaseViewModel(HostScreen,id));
       return Task.FromResult(Unit.Default);
     }
 

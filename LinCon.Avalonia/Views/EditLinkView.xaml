@@ -1,14 +1,26 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.EditLinkView">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-       <TextBlock>New Link</TextBlock>
-       <TextBox Text="{Binding Url, Mode=TwoWay}"/>
-       <TextBlock>New Name</TextBlock>
-       <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-       <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding EditCommand}">Edit</Button>
-            <Button Command="{Binding ReturnCommand}">Cancel</Button>
-       </StackPanel>
-    </StackPanel>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Background="Black" Opacity="0.5"/>
+        <Border Padding="30 0 30 30" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
+            <StackPanel Spacing="30" Orientation="Vertical">
+                <Border Margin="-30 0 -30 0" Background="#EEEEEE" CornerRadius="5 5 0 0">
+                    <Grid Height="40" ColumnDefinitions="* 50">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0">Edit Link</TextBlock>
+                        <Button Classes="closeBtn" Grid.Column="1" Command="{Binding ReturnCommand}">X</Button>
+                    </Grid>
+                </Border>
+                <StackPanel MinWidth="300" Spacing="5" Orientation="Vertical">
+                    <TextBlock>New Link</TextBlock>
+                    <TextBox Text="{Binding Url, Mode=TwoWay}"/>
+                    <TextBlock>New Name</TextBlock>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}"/>
+                    <Border Padding="0 20 0 0">
+                        <Button Classes="greenBtn" Command="{Binding EditCommand}">Change</Button>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
 </UserControl>

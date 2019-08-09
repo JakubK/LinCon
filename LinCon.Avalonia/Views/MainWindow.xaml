@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+<<<<<<< HEAD
         MinWidth="400"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LinCon.Avalonia.Views.MainWindow"
@@ -10,5 +11,38 @@
     <Grid>
         <Button VerticalAlignment="Top" Height="30" Width="100" HorizontalAlignment="Left" Command="{Binding GoBack}">Go Back</Button>
         <rxui:RoutedViewHost Router="{Binding Router}"/>
+=======
+        HasSystemDecorations="False"
+        Background="#EEEEEE"
+        MinWidth="800"
+        MinHeight="600"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="LinCon.Avalonia.Views.MainWindow"
+        Title="LinCon">
+     <Window.Styles>
+        <StyleInclude Source="avares://LinCon.Avalonia/Resources/Buttons.xaml"/>
+        <StyleInclude Source="avares://LinCon.Avalonia/Resources/Icons.xaml"/>
+     </Window.Styles>
+     <Grid RowDefinitions="5,*,5" ColumnDefinitions="2,*,2">
+        <DockPanel Grid.Column="1" Grid.Row="1" >
+            <Grid Margin="-5 -5 -5 0" Height="40" Name="TitleBar" Background="White" DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Margin="120 0 0 0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">LinCon - Your Research Container</TextBlock>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Classes="captionBtn" Name="MinimizeButton">_</Button>
+                    <Button Classes="captionBtn" Name="MaximizeButton">[ ]</Button>
+                    <Button Classes="captionBtn" Name="CloseButton">X</Button>
+                </StackPanel>
+            </Grid>
+            <rxui:RoutedViewHost Router="{Binding Router}"/>
+        </DockPanel>
+        <Border Name="TopLeft" Background="White"/>
+        <Border Name="TopRight" Background="Transparent" Grid.Column="2" />
+        <Border Name="BottomLeft" Background="Transparent" Grid.Row="2" />
+        <Border Name="BottomRight" Background="Transparent"  Grid.Row="2" Grid.Column="2"/>
+        <Border Name="Top" Background="Transparent" Grid.Column="1" />
+        <Border Name="Right" Background="Transparent" Grid.Row="1"  Grid.Column="2" />
+        <Border Name="Bottom" Background="Transparent" Grid.Row="2" Grid.Column="1"  />
+        <Border Name="Left" Background="White"  Grid.Row="1" />
+>>>>>>> release/0.9.0
     </Grid>
 </Window>

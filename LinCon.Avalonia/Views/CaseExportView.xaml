@@ -1,27 +1,36 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseExportView">
-    <StackPanel VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-        <StackPanel Orientation="Vertical"
-                Margin="0,16,0,0"
-                HorizontalAlignment="Center"
-                Spacing="16">
-            <TextBlock>Check the cases which you want to export</TextBlock>
-            <ScrollViewer Height="100">
-                <ListBox Items="{Binding Cases}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
-            <TextBlock>Export here</TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding OpenSaveFileDialogCommand}">Browse...</Button>
-                <TextBox Text="{Binding ExportPath}"/>
-            </StackPanel>
-            <Button Command="{Binding ExportCasesCommand}">Submit</Button>
+    <Grid RowDefinitions="80 *" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <StackPanel Margin="50 20 0 0" VerticalAlignment="Center" Spacing="20" Orientation="Horizontal">
+                <Button Classes="backBtn" Command="{Binding ReturnCommand}" Width="50"/>
+                <TextBlock FontSize="30" Foreground="#0D47A1">Export Case</TextBlock>
         </StackPanel>
-    </StackPanel>
+        <Border Grid.Row="1" Margin="0 30 0 30" Padding="30" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
+            <Grid RowDefinitions="50 * 120">
+                <TextBlock HorizontalAlignment="Center">Select the Cases which you want to Export</TextBlock>
+                <ScrollViewer MinWidth="400" Padding="20" Grid.Row="1" HorizontalAlignment="Stretch">
+                    <ItemsControl BorderThickness="0" Items="{Binding Cases}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox FontSize="15" Margin="0 15 0 0" IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"></CheckBox>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <StackPanel VerticalAlignment="Bottom" Spacing="20" Grid.Row="2" Orientation="Vertical">
+                    <TextBlock FontSize="12">Export here</TextBlock>
+                    <Grid Height="40" ColumnDefinitions="Auto *">
+                        <Button Width="40" Classes="browseBtn" Command="{Binding OpenSaveFileDialogCommand}">
+                            <DrawingPresenter Drawing="{DynamicResource Folder}" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Button>
+                        <Border CornerRadius="0 5 5 0" BorderThickness="1" BorderBrush="#EEEEEE" Background="#EEEEEE" Grid.Column="1">
+                            <TextBox FontSize="15" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" Text="{Binding ExportPath}"/>
+                        </Border>
+                    </Grid>
+                    <Button Margin="-30 10 -30 0" BorderThickness="0" FontSize="30" Grid.Row="2" Classes="exportBtn" Command="{Binding ExportCasesCommand}">Export</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

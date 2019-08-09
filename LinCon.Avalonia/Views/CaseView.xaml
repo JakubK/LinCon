@@ -2,25 +2,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:rxui="clr-namespace:Avalonia;assembly=Avalonia.ReactiveUI"
              x:Class="LinCon.Avalonia.Views.CaseView">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-        <TextBlock Text="{Binding Case.Name}"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Command="{Binding AddLinkCommand}">Add link</Button>
-            <Button Command="{Binding OpenAllLinksCommand}">Open links</Button>
-            <Button Command="{Binding DeleteManyLinksCommand}">Delete...</Button>
-        </StackPanel>
-        <ItemsControl Items="{Binding Case.Links}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}"/>
-                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.OpenLinkCommand}">Open</Button>
-                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.EditLinkCommand}">Edit</Button>
-                        <Button CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.DeleteLinkCommand}">Delete</Button>
+        <Grid>
+            <Border Padding="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid RowDefinitions="130 *">
+                    <StackPanel Spacing="15" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                            <Button Classes="backBtn" Width="50" Height="50" Command="{Binding ReturnCommand}"/>
+                            <TextBlock FontSize="30" Text="{Binding Case.Name}" Foreground="#0D47A1"/>
+                        </StackPanel>
+                        <StackPanel Margin="15 0 0 0" Orientation="Horizontal" Spacing="15">
+                            <Button Classes="greenBtn" Command="{Binding AddLinkCommand}">Add Link</Button>
+                            <Button Classes="defaultBtn" Command="{Binding OpenAllLinksCommand}">Open links</Button>
+                            <Button Classes="redBtn" Command="{Binding DeleteManyLinksCommand}">Delete Links</Button>
+                        </StackPanel>
                     </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>            
-        </ItemsControl>
-        <rxui:RoutedViewHost Router="{Binding Router}"/>
-    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <ScrollViewer Padding="0 0 10 0">
+                            <ItemsControl Items="{Binding Case.Links}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0 20 0 0" Padding="20 10 20 10"  Background="White" CornerRadius="10">
+                                            <Grid Margin="40 0 40 0" HorizontalAlignment="Stretch">
+                                                <TextBlock FontSize="30" VerticalAlignment="Center" Foreground="#212121" Text="{Binding Name}"/>
+                                                <StackPanel HorizontalAlignment="Right" Spacing="15" Orientation="Horizontal">
+                                                   <Button FontSize="30" Classes="defaultBtn" Foreground="Green" CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.OpenLinkCommand}">Open</Button>
+                                                   <Button FontSize="30" Classes="defaultBtn" CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.EditLinkCommand}">Edit</Button>
+                                                   <Button FontSize="30" Classes="defaultBtn" Foreground="Red" CommandParameter="{Binding }" Command="{Binding $parent[ItemsControl].DataContext.DeleteLinkCommand}">Delete</Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+            <rxui:RoutedViewHost Router="{Binding Router}"/>
+        </Grid>
 </UserControl>

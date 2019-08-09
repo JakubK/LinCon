@@ -2,29 +2,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:rxui="clr-namespace:Avalonia;assembly=Avalonia.ReactiveUI"
              x:Class="LinCon.Avalonia.Views.CaseExplorerView">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
-        <TextBlock>Your cases</TextBlock>
-        <StackPanel Orientation="Horizontal" Spacing="15">
-            <Button Command="{Binding AddCommand}">Add Case</Button>
-            <Button Command="{Binding DeleteManyCasesCommand}">Delete Cases</Button>
-        </StackPanel>
-        <ScrollViewer>
-            <ItemsControl Items="{Binding Cases}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Background="Pink" Orientation="Vertical" Spacing="10">
-                            <TextBlock Text="{Binding Name}"/>
-                            <StackPanel Spacing="15" Orientation="Horizontal">
-                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
-                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
-                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
-                                <Button CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
-                            </StackPanel>
+        <Grid>
+            <Border Padding="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid RowDefinitions="130 *">
+                    <StackPanel Spacing="15" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                            <Button Classes="backBtn" Width="50" Height="50" Command="{Binding ReturnCommand}"/>
+                            <TextBlock FontSize="30" Foreground="#0D47A1">Your cases</TextBlock>
                         </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        <rxui:RoutedViewHost Router="{Binding Router}"/>
-    </StackPanel>
+                        <StackPanel Margin="15 0 0 0" Orientation="Horizontal" Spacing="15">
+                            <Button Classes="greenBtn" Command="{Binding AddCommand}">Add Case</Button>
+                            <Button Classes="redBtn" Command="{Binding DeleteManyCasesCommand}">Delete Cases</Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <ScrollViewer Padding="0 0 10 0">
+                            <ItemsControl Items="{Binding Cases}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0 20 0 0" Padding="20 10 20 10"  Background="White" CornerRadius="10">
+                                            <StackPanel Orientation="Vertical" Spacing="10">
+                                                <TextBlock Foreground="#0D47A1" Text="{Binding Name}"/>
+                                                <StackPanel Spacing="15" Orientation="Horizontal">
+                                                    <Button Classes="greenBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
+                                                    <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
+                                                    <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
+                                                    <Button Classes="redBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+            <rxui:RoutedViewHost Router="{Binding Router}"/>
+        </Grid>
 </UserControl>

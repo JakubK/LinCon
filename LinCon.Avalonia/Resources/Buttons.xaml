@@ -1,0 +1,117 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+      <Style Selector="Button">
+          <Setter Property="Cursor" Value="Hand"/>
+      </Style>
+
+      <Style Selector="Button.greenBtn">
+          <Setter Property="Background" Value="#00796B"/>
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Padding" Value="20 10 20 10"/>
+      </Style>
+      <Style Selector="Button.greenBtn:pointerover">
+          <Setter Property="Background" Value="White"/>
+          <Setter Property="Foreground" Value="#00796B"/>
+      </Style>
+      <Style Selector="Button.greenBtn /template/ ContentPresenter">
+          <Setter Property="CornerRadius" Value="0 30 0 30"/>
+          <Setter Property="BorderBrush" Value="Transparent"/>
+      </Style>
+      <Style Selector="Button.greenBtn:pressed /template/ ContentPresenter">
+          <Setter Property="Background" Value="White"/>
+      </Style>
+      
+      <Style Selector="Button.redBtn">
+          <Setter Property="Background" Value="Transparent"/>
+          <Setter Property="Foreground" Value="Red"/>
+          <Setter Property="Padding" Value="20 10 20 10"/>
+      </Style>
+      <Style Selector="Button.redBtn:pointerover">
+          <Setter Property="Background" Value="Red"/>
+          <Setter Property="Foreground" Value="White"/>
+      </Style>
+      <Style Selector="Button.redBtn /template/ ContentPresenter">
+          <Setter Property="CornerRadius" Value="0"/>
+          <Setter Property="BorderThickness" Value="0"/>
+      </Style>
+      <Style Selector="Button.redBtn:pressed /template/ ContentPresenter">
+          <Setter Property="Background" Value="Red"/>
+      </Style>
+
+      <Style Selector="Button.closeBtn">
+          <Setter Property="Background" Value="Transparent"/>
+          <Setter Property="BorderThickness" Value="0"/>
+      </Style>
+
+      <Style Selector="Button.defaultBtn">
+          <Setter Property="Background" Value="Transparent"/>
+          <Setter Property="Foreground" Value="Black"/>
+          <Setter Property="Padding" Value="20 10 20 10"/>
+      </Style>
+      <Style Selector="Button.defaultBtn /template/ ContentPresenter">
+          <Setter Property="CornerRadius" Value="0"/>
+          <Setter Property="BorderThickness" Value="0"/>
+      </Style>
+
+      <Style Selector="Button.exportBtn">
+          <Setter Property="Background" Value="#0097A7"/>
+          <Setter Property="Foreground" Value="White"/>
+      </Style>
+      <Style Selector=".exportBtn /template/ ContentPresenter">
+          <Setter Property="CornerRadius" Value="15"/>
+      </Style>
+
+      <Style Selector="Button.browseBtn">
+          <Setter Property="Background" Value="#0097A7"/>
+          <Setter Property="BorderThickness" Value="0"/>
+          <Setter Property="Foreground" Value="White"/>
+      </Style>
+      <Style Selector=".browseBtn /template/ ContentPresenter">
+          <Setter Property="CornerRadius" Value="5 0 0 5"/>
+      </Style>
+
+      <Style Selector="Button.fromComputerBtn">
+          <Setter Property="Background" Value="#0097A7"/>
+          <Setter Property="Foreground" Value="White"/>
+      </Style>
+      <Style Selector=".fromComputerBtn /template/ ContentPresenter">
+          <Setter Property="CornerRadius" Value="15"/>
+      </Style>
+
+      <Style Selector="Button.backBtn">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+                <DrawingPresenter Drawing="{DynamicResource LeftArrow}" Width="50" Height="50" HorizontalAlignment="Center"/>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style Selector="Button.menuItem">
+        <Setter Property="Margin" Value="9,3,9,3"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="Padding" Value="6"/>
+        <Setter Property="Background" Value="#0097A7"/>
+        <Setter Property="Foreground" Value="White"/>
+      </Style>
+      <Style Selector="Button.menuItem /template/ ContentPresenter">
+        <Setter Property="CornerRadius" Value="0 30 0 30"/>
+      </Style>
+      <Style Selector="Button.menuItem:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="Red"/>
+      </Style>
+
+      <Style Selector="Button.captionBtn">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+      </Style>
+      <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="#EEEEEE"></Setter>
+      </Style>
+</Styles>
