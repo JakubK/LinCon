@@ -47,7 +47,6 @@ namespace LinCon.Avalonia.ViewModels
         OpenAllLinksCommand = ReactiveCommand.CreateFromTask(OpenAllLinks);
         DeleteLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(DeleteLink);
         AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
-        RefreshCommand = ReactiveCommand.CreateFromTask<Unit>(Refresh);
         EditLinkCommand = ReactiveCommand.CreateFromTask<LinkItem,Unit>(EditLink);
         DeleteManyLinksCommand = ReactiveCommand.CreateFromTask(DeleteManyLinks);
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
