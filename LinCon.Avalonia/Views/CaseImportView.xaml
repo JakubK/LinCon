@@ -1,10 +1,26 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.CaseImportView">
+<<<<<<< HEAD
+    <StackPanel VerticalAlignment="Center" Orientation="Vertical" Spacing="4">
+        <StackPanel Orientation="Vertical"
+                Margin="0,16,0,0"
+                HorizontalAlignment="Center"
+                Spacing="16">
+            <Border Background="{DynamicResource ThemeAccentBrush2}" Padding="16" 
+                    DragDrop.AllowDrop="True">
+                <TextBlock Name="DropState">Drop some text or files here</TextBlock>
+            </Border>
+            <TextBlock HorizontalAlignment="Center">Drag Cases here</TextBlock>
+            <TextBlock HorizontalAlignment="Center">or</TextBlock>
+            <Button Command="{Binding ImportCommand}">Choose from your Computer</Button>
+        </StackPanel>
+    </StackPanel>
+=======
     <Grid RowDefinitions="80 *" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <StackPanel Margin="50 20 0 0" VerticalAlignment="Center" Spacing="20" Orientation="Horizontal">
                 <Button Classes="backBtn" Command="{Binding ReturnCommand}" Width="50"/>
-                <TextBlock FontSize="30" Foreground="#0D47A1">Export Case</TextBlock>
+                <TextBlock FontSize="30" Foreground="#0D47A1">Import Case</TextBlock>
         </StackPanel>
         <Border DragDrop.AllowDrop="True" Name="DropState" Grid.Row="1" Margin="0 30 0 0" Padding="30 30 30 0" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
             <Grid MinWidth="400" RowDefinitions="* 120">
@@ -17,4 +33,5 @@
             </Grid>
         </Border>
     </Grid>
+>>>>>>> release/0.9.0
 </UserControl>

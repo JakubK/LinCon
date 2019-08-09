@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reactive;
-using System.Text;
-using ReactiveUI;
+﻿using ReactiveUI;
 
 namespace LinCon.Avalonia.ViewModels
 {
@@ -10,6 +6,7 @@ namespace LinCon.Avalonia.ViewModels
     {
         
         public RoutingState Router { get; } = new RoutingState();     
+        public ReactiveCommand<Unit, Unit> GoBack => Router.NavigateBack;
 
         public MainWindowViewModel()
         {

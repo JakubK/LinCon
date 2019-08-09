@@ -9,7 +9,7 @@ namespace LinCon.Core.Services
 {
   public class CaseImporter : ICaseImporter
   {
-    public IEnumerable<Case> Import(IEnumerable<string> paths)
+    public IEnumerable<Case> Import(params string[] paths)
     {
         foreach(var path in paths)
         {

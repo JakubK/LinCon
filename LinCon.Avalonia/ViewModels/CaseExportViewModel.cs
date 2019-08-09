@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Avalonia.Controls;
 using LinCon.Avalonia.Models;
-using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
 using Splat;
