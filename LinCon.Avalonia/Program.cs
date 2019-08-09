@@ -65,6 +65,7 @@ namespace LinCon.Avalonia
             var config = new MapperConfiguration(cfg =>
             {
                cfg.CreateMap<Case, ExportItem>(); 
+               cfg.CreateMap<Case, CaseItem>(); 
                cfg.CreateMap<Link, DeleteLinkItem>(); 
             });
             var mapper = config.CreateMapper();

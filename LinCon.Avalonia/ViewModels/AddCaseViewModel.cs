@@ -57,7 +57,7 @@ namespace LinCon.Avalonia.ViewModels
       };
 
       _caseRepository.Insert(c);
-      _parent.Cases.Add(_mapper.Map<ExportItem>(c));
+      _parent.Cases.Add(_mapper.Map<CaseItem>(c));
 
       ReturnCommand.Execute();
       return Task.FromResult(Unit.Default);
