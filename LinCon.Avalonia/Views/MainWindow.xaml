@@ -3,15 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-<<<<<<< HEAD
-        MinWidth="400"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="LinCon.Avalonia.Views.MainWindow"
-        Title="LinCon">
-    <Grid>
-        <Button VerticalAlignment="Top" Height="30" Width="100" HorizontalAlignment="Left" Command="{Binding GoBack}">Go Back</Button>
-        <rxui:RoutedViewHost Router="{Binding Router}"/>
-=======
         HasSystemDecorations="False"
         Background="#EEEEEE"
         MinWidth="800"
@@ -43,6 +34,5 @@
         <Border Name="Right" Background="Transparent" Grid.Row="1"  Grid.Column="2" />
         <Border Name="Bottom" Background="Transparent" Grid.Row="2" Grid.Column="1"  />
         <Border Name="Left" Background="White"  Grid.Row="1" />
->>>>>>> release/0.9.0
     </Grid>
 </Window>
