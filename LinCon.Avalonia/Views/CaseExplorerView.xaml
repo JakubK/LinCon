@@ -27,7 +27,7 @@
                                                     <Button Classes="greenBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ViewCaseCommand}">View more</Button>
                                                     <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.EditCaseCommand}">Edit name</Button>
                                                     <Button Classes="defaultBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.ExecuteCaseCommand}">Open Links</Button>
-                                                    <Button Classes="redBtn" CommandParameter="{Binding ID}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
+                                                    <Button Classes="redBtn" CommandParameter="{Binding}" Command="{Binding $parent[ItemsControl].DataContext.DeleteCommand}">Delete</Button>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
