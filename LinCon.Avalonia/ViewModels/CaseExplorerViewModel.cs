@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -15,8 +16,8 @@ namespace LinCon.Avalonia.ViewModels
     public IScreen HostScreen { get; }
     public string UrlPathSegment { get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
 
-    private IEnumerable<ExportItem> cases;
-    public IEnumerable<ExportItem> Cases
+    private ObservableCollection<ExportItem> cases;
+    public ObservableCollection<ExportItem> Cases
     {
       get => cases;
       set => this.RaiseAndSetIfChanged(ref cases,value);
@@ -34,7 +35,7 @@ namespace LinCon.Avalonia.ViewModels
       _mapper = Locator.Current.GetService<IMapper> ();
       _caseProcessor = Locator.Current.GetService<ICaseProcessor>();
 
-      Cases = _mapper.Map<ExportItem[]> (_caseRepository.GetAll ());
+      Cases = _mapper.Map<ObservableCollection<ExportItem>> (_caseRepository.GetAll ());
 
       DeleteCommand = ReactiveCommand.CreateFromTask<int, Unit> (Delete);
       AddCommand = ReactiveCommand.CreateFromTask(Add);
