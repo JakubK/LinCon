@@ -1,5 +1,7 @@
+using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading.Tasks;
+using AutoMapper;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -20,17 +22,25 @@ namespace LinCon.Avalonia.ViewModels
       get => @case;
       set => this.RaiseAndSetIfChanged(ref @case,value);
     }
+
+    public ObservableCollection<Link> Links {get;set;}
     
     ICaseRepository _caseRepository;
     ICaseProcessor _caseProcessor;
+    IMapper _mapper;
+
+    int caseId;
     public CaseViewModel(IScreen screen, int id)
     {
         HostScreen = screen;
       
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
         _caseProcessor = Locator.Current.GetService<ICaseProcessor>();
+        _mapper = Locator.Current.GetService<IMapper>();
 
-        Case = _caseRepository.GetById(id);
+        caseId = id;
+
+        Links = _mapper.Map<ObservableCollection<Link>>(_caseRepository.GetById(id).Links);
 
         OpenLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(OpenLink);
         OpenAllLinksCommand = ReactiveCommand.CreateFromTask(OpenAllLinks);
@@ -58,7 +68,8 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand OpenAllLinksCommand {get;}
     private Task<Unit> OpenAllLinks()
     {
-      _caseProcessor.ProcessCase(Case);
+      foreach(var link in Links)
+        _caseProcessor.ProcessLink(link);
       return Task.FromResult(Unit.Default);
     }
 
@@ -72,14 +83,7 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddLinkCommand {get;}
     private Task<Unit> AddLink()
     {
-      Router.Navigate.Execute(new AddLinkViewModel(this,this,Case.ID));
-      return Task.FromResult(Unit.Default);
-    }
-
-    public ReactiveCommand<Unit,Unit> RefreshCommand {get;}
-    private Task<Unit> Refresh()
-    {
-      Case = _caseRepository.GetById(Case.ID);      
+      Router.Navigate.Execute(new AddLinkViewModel(this,this,caseId));
       return Task.FromResult(Unit.Default);
     }
 
