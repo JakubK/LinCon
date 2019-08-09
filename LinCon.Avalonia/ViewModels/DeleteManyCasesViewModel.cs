@@ -47,11 +47,16 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> DeleteMany()
     {
       var checkedItems = CaseItems.Where(x => x.IsChecked);
+      var items = _parent.Cases.Where(x => checkedItems.Any(y => y.ID == x.ID));
+
+      foreach(var item in items.ToList())
+      {
+        _parent.Cases.Remove(item);
+      }
 
       foreach(var caseItem in checkedItems)
       {
         _caseRepository.Delete(caseItem.ID);
-        _parent.Cases.Remove(_mapper.Map<CaseItem>(caseItem));
       }
 
       ReturnCommand.Execute();
