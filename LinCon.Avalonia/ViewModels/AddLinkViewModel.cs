@@ -10,7 +10,6 @@ namespace LinCon.Avalonia.ViewModels
   public class AddLinkViewModel : ReactiveObject, IRoutableViewModel
   {
     public string UrlPathSegment {get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
-
     public IScreen HostScreen {get;}
 
     private string name;
@@ -54,15 +53,18 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddLinkCommand {get;}
     private Task<Unit> AddLink()
     {
-      Case.Links.Add(new Link
+      Link link =new Link
       {
         Name = Name,
         Url = Link
-      });
+      }; 
+
+      _parentViewModel.Links.Add(link);
+
+      Case.Links.Add(link);
       _caseRepository.Update(Case);
 
       ReturnCommand.Execute();
-      _parentViewModel.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
 
