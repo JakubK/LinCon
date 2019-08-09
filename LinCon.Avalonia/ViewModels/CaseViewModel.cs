@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading.Tasks;
 using AutoMapper;
+using LinCon.Avalonia.Models;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -23,7 +24,7 @@ namespace LinCon.Avalonia.ViewModels
       set => this.RaiseAndSetIfChanged(ref @case,value);
     }
 
-    public ObservableCollection<Link> Links {get;set;}
+    public ObservableCollection<LinkItem> Links {get;set;}
     
     ICaseRepository _caseRepository;
     ICaseProcessor _caseProcessor;
@@ -40,14 +41,14 @@ namespace LinCon.Avalonia.ViewModels
 
         caseId = id;
 
-        Links = _mapper.Map<ObservableCollection<Link>>(_caseRepository.GetById(id).Links);
+        Links = _mapper.Map<ObservableCollection<LinkItem>>(_caseRepository.GetById(id).Links);
 
         OpenLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(OpenLink);
         OpenAllLinksCommand = ReactiveCommand.CreateFromTask(OpenAllLinks);
         DeleteLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(DeleteLink);
         AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
         RefreshCommand = ReactiveCommand.CreateFromTask<Unit>(Refresh);
-        EditLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(EditLink);
+        EditLinkCommand = ReactiveCommand.CreateFromTask<LinkItem,Unit>(EditLink);
         DeleteManyLinksCommand = ReactiveCommand.CreateFromTask(DeleteManyLinks);
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
     }
@@ -87,10 +88,10 @@ namespace LinCon.Avalonia.ViewModels
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand<Link,Unit> EditLinkCommand {get;}
-    private Task<Unit> EditLink(Link link)
+    public ReactiveCommand<LinkItem,Unit> EditLinkCommand {get;}
+    private Task<Unit> EditLink(LinkItem link)
     {
-      Router.Navigate.Execute(new EditLinkViewModel(this,this,Case.ID,link));
+      Router.Navigate.Execute(new EditLinkViewModel(this,this,caseId,link));
       return Task.FromResult(Unit.Default);
     }
 
