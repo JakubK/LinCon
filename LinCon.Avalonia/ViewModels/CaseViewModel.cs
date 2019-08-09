@@ -70,7 +70,8 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> OpenAllLinks()
     {
       foreach(var link in Links)
-        _caseProcessor.ProcessLink(link);
+        _caseProcessor.ProcessUrl(link.Url);
+
       return Task.FromResult(Unit.Default);
     }
 
