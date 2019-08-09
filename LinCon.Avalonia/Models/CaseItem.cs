@@ -1,8 +1,16 @@
+using ReactiveUI;
+
 namespace LinCon.Avalonia.Models
 {
-    public struct CaseItem
+    public class CaseItem : ReactiveObject
     {
       public int ID {get;set;}
-      public string Name {get;set;}
+
+      string name;
+      public string Name
+      {
+        get => name;
+        set => this.RaiseAndSetIfChanged(ref name,value);
+      }
     }
 }
