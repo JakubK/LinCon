@@ -46,9 +46,9 @@ namespace LinCon.Avalonia.ViewModels
       var linkToRemove = Case.Links.Where(x => x.Url == Link.Url && x.Name == Link.Name).First();
       Case.Links.Remove(linkToRemove);
       _caseRepository.Update(Case);
+      _parentViewModel.Links.Remove(Link);
 
       ReturnCommand.Execute();
-      _parentViewModel.RefreshCommand.Execute();
       
       return Task.FromResult(Unit.Default);
     }
