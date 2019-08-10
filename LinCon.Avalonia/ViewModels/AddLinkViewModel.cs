@@ -1,5 +1,7 @@
 using System.Reactive;
 using System.Threading.Tasks;
+using AutoMapper;
+using LinCon.Avalonia.Models;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -10,7 +12,6 @@ namespace LinCon.Avalonia.ViewModels
   public class AddLinkViewModel : ReactiveObject, IRoutableViewModel
   {
     public string UrlPathSegment {get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
-
     public IScreen HostScreen {get;}
 
     private string name;
@@ -38,6 +39,8 @@ namespace LinCon.Avalonia.ViewModels
 
     CaseViewModel _parentViewModel;
 
+    IMapper _mapper;
+
     public AddLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId)
     {
         HostScreen = screen;
@@ -47,6 +50,7 @@ namespace LinCon.Avalonia.ViewModels
 
         _parentViewModel = parentViewModel;
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
+        _mapper = Locator.Current.GetService<IMapper>();
 
         Case = _caseRepository.GetById(caseId);
     }   
@@ -54,15 +58,18 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddLinkCommand {get;}
     private Task<Unit> AddLink()
     {
-      Case.Links.Add(new Link
+      Link link =new Link
       {
         Name = Name,
         Url = Link
-      });
+      }; 
+
+      _parentViewModel.Links.Add(_mapper.Map<LinkItem>(link));
+
+      Case.Links.Add(link);
       _caseRepository.Update(Case);
 
       ReturnCommand.Execute();
-      _parentViewModel.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
 

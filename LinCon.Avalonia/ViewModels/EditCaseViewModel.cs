@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using LinCon.Core.Models;
@@ -41,10 +42,13 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> Edit()
     {
       Case.Name = Name;
+
       _caseRepository.Update(Case);
-      
-      ReturnCommand.Execute();
-      _parent.RefreshCommand.Execute();
+
+      var item = _parent.Cases.FirstOrDefault(x => x.ID == Case.ID);
+      item.Name = Name;
+
+      ReturnCommand.Execute();      
       
       return Task.FromResult(Unit.Default);
     }

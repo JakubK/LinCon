@@ -6,5 +6,6 @@ namespace LinCon.Core.Services.Abstract
     {
         void ProcessCase(Case @case);
         void ProcessLink(Link link);
+        void ProcessUrl(string url);
     }
 }

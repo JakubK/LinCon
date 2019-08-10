@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using LinCon.Avalonia.Models;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -21,11 +22,11 @@ namespace LinCon.Avalonia.ViewModels
       set => this.RaiseAndSetIfChanged(ref _case, value);
     }
 
-    public Link Link {get;set;}
+    public LinkItem Link {get;set;}
 
     CaseViewModel _parentViewModel;
 
-    public DeleteLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, Link link)
+    public DeleteLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, LinkItem link)
     {
         HostScreen = screen;
 
@@ -46,9 +47,9 @@ namespace LinCon.Avalonia.ViewModels
       var linkToRemove = Case.Links.Where(x => x.Url == Link.Url && x.Name == Link.Name).First();
       Case.Links.Remove(linkToRemove);
       _caseRepository.Update(Case);
+      _parentViewModel.Links.Remove(Link);
 
       ReturnCommand.Execute();
-      _parentViewModel.RefreshCommand.Execute();
       
       return Task.FromResult(Unit.Default);
     }

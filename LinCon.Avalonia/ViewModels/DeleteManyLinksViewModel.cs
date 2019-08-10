@@ -53,14 +53,18 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> DeleteMany()
     {
       var checkedItems = DeleteLinkItems.Where(x => x.IsChecked);
-      var allLinks = Case.Links;
-      var linksToNotDelete = allLinks.Where(x => !checkedItems.Any(y => y.Url == x.Url)).ToList(); 
+      var linksToDelete = Case.Links.Where(x => checkedItems.Any(y => y.Url == x.Url)).ToList(); 
 
-      Case.Links = linksToNotDelete;
+      foreach(var item in linksToDelete)
+        Case.Links.Remove(item);
+
       _caseRepository.Update(Case);
 
+      var items = _parentView.Links.Where(x => checkedItems.Any(y => y.Url == x.Url && y.Name == y.Url)).ToList();
+      foreach(var item in items)
+        _parentView.Links.Remove(item);
+
       ReturnCommand.Execute();
-      _parentView.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
   }

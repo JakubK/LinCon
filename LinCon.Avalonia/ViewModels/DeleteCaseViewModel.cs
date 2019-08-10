@@ -1,5 +1,7 @@
 using System.Reactive;
 using System.Threading.Tasks;
+using AutoMapper;
+using LinCon.Avalonia.Models;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -12,16 +14,17 @@ namespace LinCon.Avalonia.ViewModels
     public string UrlPathSegment {get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
     public IScreen HostScreen {get;}
     CaseExplorerViewModel _parent;
-    public Case Case {get;set;}
+    public CaseItem DeleteItem {get;set;}
     ICaseRepository _caseRepository;
-    public DeleteCaseViewModel(IScreen screen, CaseExplorerViewModel parent, int caseId)
+
+    public DeleteCaseViewModel(IScreen screen, CaseExplorerViewModel parent, CaseItem deleteItem)
     {
         HostScreen = screen;
         _parent = parent;
 
         _caseRepository = Locator.Current.GetService<ICaseRepository>();
 
-        Case = _caseRepository.GetById(caseId);
+        DeleteItem = deleteItem;
 
         DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
         ReturnCommand = ReactiveCommand.CreateFromTask(Return);
@@ -31,11 +34,10 @@ namespace LinCon.Avalonia.ViewModels
 
     private Task<Unit> Delete()
     {
-      _caseRepository.Delete(Case.ID);
+      _caseRepository.Delete(DeleteItem.ID);
+      _parent.Cases.Remove(DeleteItem);
 
       ReturnCommand.Execute();
-      _parent.RefreshCommand.Execute();
-      
       return Task.FromResult(Unit.Default);
     }
 
