@@ -8,7 +8,7 @@
                     <StackPanel Spacing="15" Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Spacing="15">
                             <Button Classes="backBtn" Width="50" Height="50" Command="{Binding ReturnCommand}"/>
-                            <TextBlock FontSize="30" Text="{Binding Case.Name}" Foreground="#0D47A1"/>
+                            <TextBlock FontSize="30" Text="{Binding Name}" Foreground="#0D47A1"/>
                         </StackPanel>
                         <StackPanel Margin="15 0 0 0" Orientation="Horizontal" Spacing="15">
                             <Button Classes="greenBtn" Command="{Binding AddLinkCommand}">Add Link</Button>
