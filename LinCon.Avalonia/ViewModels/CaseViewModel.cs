@@ -17,13 +17,6 @@ namespace LinCon.Avalonia.ViewModels
     public IScreen HostScreen {get;set;} 
     public RoutingState Router { get; } = new RoutingState();
 
-    private Case @case;
-    public Case Case
-    {
-      get => @case;
-      set => this.RaiseAndSetIfChanged(ref @case,value);
-    }
-
     public ObservableCollection<LinkItem> Links {get;set;}
     
     ICaseRepository _caseRepository;
@@ -31,6 +24,7 @@ namespace LinCon.Avalonia.ViewModels
     IMapper _mapper;
 
     int caseId;
+    public string Name {get;set;}
     public CaseViewModel(IScreen screen, int id)
     {
         HostScreen = screen;
@@ -40,6 +34,7 @@ namespace LinCon.Avalonia.ViewModels
         _mapper = Locator.Current.GetService<IMapper>();
 
         caseId = id;
+        Name = _caseRepository.GetById(caseId).Name;
 
         Links = _mapper.Map<ObservableCollection<LinkItem>>(_caseRepository.GetById(id).Links);
 
