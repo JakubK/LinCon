@@ -10,6 +10,8 @@
 *.sln.docstates
 *.db
 
+LinCon.Avalonia.Installer/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

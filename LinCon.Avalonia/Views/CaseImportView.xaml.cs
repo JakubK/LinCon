@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -8,7 +9,7 @@ namespace LinCon.Avalonia.Views
 {
     public class CaseImportView : ReactiveUserControl<CaseImportViewModel>
     {
-        private TextBlock _DropState;
+        private Border _DropState;
         public CaseImportView()
         {
             this.InitializeComponent();
@@ -29,17 +30,14 @@ namespace LinCon.Avalonia.Views
         private void Drop(object sender, DragEventArgs e)
         {
             if (e.Data.Contains(DataFormats.FileNames))
-            {
-                _DropState.Text = string.Join(Environment.NewLine, e.Data.GetFileNames());
                 ViewModel.DropCommand.Execute(e);
-            }
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 
-            _DropState = this.Find<TextBlock>("DropState");
+            _DropState = this.Find<Border>("DropState");
         }
     }
 }

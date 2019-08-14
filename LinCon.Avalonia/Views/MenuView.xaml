@@ -1,22 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="LinCon.Avalonia.Views.MenuView">
-<<<<<<< HEAD
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" MinWidth="300"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1"
-                VerticalAlignment="Center"
-                Spacing="30">
-            <Button Command="{Binding RouteCaseExplorer}" >View Cases</Button>
-            <Button Command="{Binding RouteCaseExport}">Export Case</Button>
-            <Button Command="{Binding RouteCaseImport}">Import Case</Button>
-        </StackPanel>
-    </Grid>
-=======
     <StackPanel MinWidth="300" MaxWidth="600"
             VerticalAlignment="Center"
             Spacing="30">
@@ -24,5 +8,4 @@
         <Button Classes="menuItem" Command="{Binding RouteCaseImport}">Import Case</Button>
         <Button Classes="menuItem" Command="{Binding RouteCaseExport}">Export Case</Button>
     </StackPanel>
->>>>>>> release/0.9.0
 </UserControl>

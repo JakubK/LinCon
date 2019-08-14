@@ -14,7 +14,6 @@ namespace LinCon.Avalonia.ViewModels
   {
     public string UrlPathSegment {get; } = System.Guid.NewGuid ().ToString ().Substring (0, 5);
     public IScreen HostScreen {get;}
-
     public List<ExportItem> CaseItems {get;set;}
 
     ICaseRepository _caseRepository;
@@ -48,13 +47,17 @@ namespace LinCon.Avalonia.ViewModels
     private Task<Unit> DeleteMany()
     {
       var checkedItems = CaseItems.Where(x => x.IsChecked);
-      var allCases = _caseRepository.GetAll();
-      var casesToRemove = allCases.Where(x => checkedItems.Any(y => y.ID == x.ID));
+      var items = _parent.Cases.Where(x => checkedItems.Any(y => y.ID == x.ID));
 
-      foreach(var caseItem in casesToRemove)
+      foreach(var item in items.ToList())
+      {
+        _parent.Cases.Remove(item);
+      }
+
+      foreach(var caseItem in checkedItems)
+      {
         _caseRepository.Delete(caseItem.ID);
-
-      _parent.RefreshCommand.Execute();
+      }
 
       ReturnCommand.Execute();
       

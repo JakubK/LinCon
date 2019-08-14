@@ -1,5 +1,7 @@
 using System.Reactive;
 using System.Threading.Tasks;
+using AutoMapper;
+using LinCon.Avalonia.Models;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -23,10 +25,13 @@ namespace LinCon.Avalonia.ViewModels
 
     ICaseRepository _caseRepository;
 
+    IMapper _mapper;
+
     public AddCaseViewModel(IScreen screen, CaseExplorerViewModel parent)
     {
         HostScreen = screen;
         _parent = parent;
+        _mapper = Locator.Current.GetService<IMapper>();
 
         Name = "New Empty Case";
 
@@ -47,12 +52,14 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand AddCommand {get;}
     private Task<Unit> Add()
     {
-      _caseRepository.Insert(new Case
-      {
+      Case c = new Case{
         Name = Name
-      });
+      };
+
+      _caseRepository.Insert(c);
+      _parent.Cases.Add(_mapper.Map<CaseItem>(c));
+
       ReturnCommand.Execute();
-      _parent.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
   }

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using LinCon.Avalonia.Models;
 using LinCon.Core.Models;
 using LinCon.Core.Services.Abstract;
 using ReactiveUI;
@@ -39,9 +40,9 @@ namespace LinCon.Avalonia.ViewModels
 
     CaseViewModel _parentViewModel;
 
-    Link oldLink;
+    LinkItem oldLink;
 
-    public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, Link link)
+    public EditLinkViewModel(IScreen screen, CaseViewModel parentViewModel, int caseId, LinkItem link)
     {
         HostScreen = screen;
 
@@ -61,19 +62,14 @@ namespace LinCon.Avalonia.ViewModels
     public ReactiveCommand EditCommand {get;}
     private Task<Unit> Edit()
     {
-      var linkToRemove = Case.Links.Where(x => x.Url == oldLink.Url).First();      
-      Case.Links.Remove(linkToRemove);
-
-      Case.Links.Add(new Link
-      {
-        Name = Name,
-        Url = Url
-      });
+      var linkToUpdate = Case.Links.Where(x => x.Url == oldLink.Url).First();      
+      var item = _parentViewModel.Links.First(x => x.Url == oldLink.Url && x.Name == oldLink.Name);
+      item.Name = linkToUpdate.Name =  Name;
+      item.Url = linkToUpdate.Url = Url;
 
       _caseRepository.Update(Case);
 
       ReturnCommand.Execute();
-      _parentViewModel.RefreshCommand.Execute();
       return Task.FromResult(Unit.Default);
     }
 
