@@ -38,7 +38,7 @@ namespace LinCon.Avalonia.ViewModels
 
         Links = _mapper.Map<ObservableCollection<LinkItem>>(_caseRepository.GetById(id).Links);
 
-        OpenLinkCommand = ReactiveCommand.CreateFromTask<Link,Unit>(OpenLink);
+        OpenLinkCommand = ReactiveCommand.CreateFromTask<string,Unit>(OpenLink);
         OpenAllLinksCommand = ReactiveCommand.CreateFromTask(OpenAllLinks);
         DeleteLinkCommand = ReactiveCommand.CreateFromTask<LinkItem,Unit>(DeleteLink);
         AddLinkCommand = ReactiveCommand.CreateFromTask(AddLink);
@@ -53,10 +53,10 @@ namespace LinCon.Avalonia.ViewModels
       return Task.FromResult(Unit.Default);
     }
 
-    public ReactiveCommand<Link, Unit> OpenLinkCommand {get;}
-    private Task<Unit> OpenLink(Link link)
+    public ReactiveCommand<string, Unit> OpenLinkCommand {get;}
+    private Task<Unit> OpenLink(string url)
     {
-      _caseProcessor.ProcessLink(link);
+      _caseProcessor.ProcessUrl(url);
       return Task.FromResult(Unit.Default);
     }
 
