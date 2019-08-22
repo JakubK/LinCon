@@ -1,5 +1,7 @@
 # LinCon
 
+<img src="Images/LinCon.png"/>
+
 A Cross-Platform Research Container tool I built for myself to manage articles and useful links I found on the Internet.
 Built with AvaloniaUI and ReactiveUI on .NET Core 
 
