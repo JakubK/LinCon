@@ -6,6 +6,7 @@
         HasSystemDecorations="False"
         Background="#EEEEEE"
         MinWidth="800"
+        Icon="/Assets/Icon.png"
         MinHeight="600"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LinCon.Avalonia.Views.MainWindow"
